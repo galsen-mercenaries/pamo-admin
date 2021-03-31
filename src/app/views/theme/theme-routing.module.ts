@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { UtilisateurComponent } from './utilisateur.component';
-import { NewsComponent } from './news.component'
+import { UtilisateurComponent } from './utilisateur/utilisateur.component';
+import { NewsComponent } from './news/news.component'
+import { AddNewsComponent } from './news/add-news/add-news.component';
+import { AutresComponent } from './autres/autres.component';
+
 
 const routes: Routes = [
   {
@@ -27,6 +30,20 @@ const routes: Routes = [
         component: NewsComponent,
         data: {
           title: 'news'
+        }
+      },
+      {
+        path: 'news/add',
+        component: AddNewsComponent,
+        data: {
+          title: 'Ajout Infos'
+        }
+      },
+      {
+        path: 'autres',
+        component: AutresComponent,
+        data: {
+          title: 'Autres Services'
         }
       }
     ]

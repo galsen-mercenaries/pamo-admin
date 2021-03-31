@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  baseUrl :  "http://pamo-back-end-dev.us-east-1.elasticbeanstalk.com/api/"
 };

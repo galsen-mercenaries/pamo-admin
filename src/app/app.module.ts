@@ -6,8 +6,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -21,7 +26,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-
+import { HttpClientModule } from '@angular/common/http';
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -41,6 +46,8 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown'; 
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { NewsComponent } from './views/theme/news/news.component';
+import { UtilisateurComponent } from './views/theme/utilisateur/utilisateur.component';
 
 @NgModule({
   imports: [
@@ -58,13 +65,23 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    ModalModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    MatSliderModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
     P500Component,
-    LoginComponent
+    LoginComponent,
+    NewsComponent,
+    UtilisateurComponent
   ],
   providers: [
     {

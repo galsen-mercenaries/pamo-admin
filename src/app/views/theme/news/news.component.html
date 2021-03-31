@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-4 col-sm-2">
+      <div class="card">
+          <div class="card-body text-center">
+              <div class="text-muted small text-uppercase font-weight-bold">Total News</div>
+              <div class="h2 py-3" *ngIf="news">{{news.length}}</div>
+              <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-4 col-sm-2">
+      <div class="card">
+          <div class="card-body text-center">
+              <div class="text-muted small text-uppercase font-weight-bold">News Publiés</div>
+              <div class="h2 py-3" *ngIf="news">{{news.length}}</div>
+              <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-md-4 col-sm-2">
+      <div class="card">
+          <div class="card-body text-center">
+              <div class="text-muted small text-uppercase font-weight-bold">News en attente</div>
+              <div class="h2 py-3" *ngIf="news">{{news.length}}</div>
+              <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+<div class="row">
+  <button mat-raised-button color="primary" routerLink="/theme/news/add">
+    <i class="fa fa-plus"></i> Nouveau News
+  </button>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-4" *ngFor="let new of news;">
+     <div class="card">
+        <!--<img class="card-img-top" [src]="new.image_url" alt="Card image cap">-->
+        <img class="card-img-top" [src]="new.image_url" alt="Card image cap">
+        <div class="card-body">
+           <h4 class="card-title border-bottom pb-3">{{new.titre}} <span *ngIf="new.is_actif == false" class="badge badge-warning">En attente</span>
+            <span *ngIf="new.is_actif == true" class="badge badge-success">Publié</span><button  class="btn btn-square btn-primary float-right d-inline-flex share"><i class="fa fa-edit fa-lg mt-4"></i></button><button (click)="deleteNew(new.id, delete)" class="btn btn-square btn-danger float-right d-inline-flex share"><i class="fa fa-trash fa-lg mt-4"></i></button></h4>
+           <p class="card-text">{{new.contenu}}</p>
+           <a href="#" class="float-right">Lire plus <i class="fa fa-angle-double-right fa-lg mt-4"></i></a>
+        </div>
+     </div>
+  </div>
+</div>
+<ng-template #delete>
+  <div class="modal-body text-center">
+    <p>Veuillez-confirmer pour la suppression de la catégorie</p>
+    <button type="button" class="btn btn-danger" (click)="confirmDelete()" >OUI</button>
+    <button type="button" class="btn btn-default" (click)="decline()" >NON</button>
+  </div>
+</ng-template>

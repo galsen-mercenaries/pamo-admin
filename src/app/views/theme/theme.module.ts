@@ -7,6 +7,8 @@ import { NewsComponent } from './news.component'
 // Theme Routing
 import { ThemeRoutingModule } from './theme-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddNewsComponent } from './news/add-news/add-news.component';
+import { AutresComponent } from './autres/autres.component';
 
 @NgModule({
   imports: [
@@ -17,7 +19,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     UtilisateurComponent,
-    NewsComponent
+    NewsComponent,
+    AddNewsComponent,
+    AutresComponent
   ]
 })
 export class ThemeModule { }

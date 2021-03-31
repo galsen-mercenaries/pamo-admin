@@ -1,0 +1,227 @@
+<div class="row">
+  <button mat-raised-button color="primary" (click)="openModal(template)">
+    <i class="fa fa-plus"></i> Nouvel Utilisateur
+  </button>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Utilisateur
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Prénom</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Rôle</th>
+              <th>Numéro</th>
+              <th>Adresse</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.prenom }}</td>
+              <td>{{ user.nom }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td>{{ user.numero }}</td>
+              <td>{{ user.adresse }}</td>
+              <td>
+                <span *ngIf="user.account_status == false" class="badge badge-warning">En attente</span>
+                <span *ngIf="user.account_status == true" class="badge badge-success">Validé</span>
+              </td>
+              <td>
+                <button type="button" class="btn btn-square btn-primary" (click)="readutilisateur(user.email)">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button type="button" class="btn btn-square btn-success"
+                  (click)="updateutilisateur(user.email, update)">
+                  <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <button type="button" class="btn btn-square btn-danger" (click)="banUtilisateur(user.email,banir)">
+                  <i class="fa fa-ban"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #template>
+  <div class="card">
+    <div class="card-header">
+      <strong>Ajout Utilisateur</strong>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="utilisateurForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Prénom</label>
+          <div class="col-md-9">
+            <input type="text" id="prenom" formControlName="prenom" class="form-control" placeholder="Prénom"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Nom</label>
+          <div class="col-md-9">
+            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom" required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Email</label>
+          <div class="col-md-9">
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Numero</label>
+          <div class="col-md-9">
+            <input type="text" id="numero" formControlName="numero" class="form-control" placeholder="numero"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Adresse</label>
+          <div class="col-md-9">
+            <input type="text" id="adresse" formControlName="adresse" class="form-control" placeholder="adresse"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Mot de passe</label>
+          <div class="col-md-9">
+            <input type="password" id="password" formControlName="password" class="form-control"
+              placeholder="Mot de passe" required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Role</label>
+          <div class="col-md-6">
+            <mat-select formControlName="role" class="form-control" (selectionChange)="onRoleChange($event.value)">
+              <mat-option *ngFor="let role of roles" [value]="role.code">
+                {{ role.nom }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="roleSelected === 'ROLE_MEDECIN'">
+          <label class="col-md-3 col-form-label">Spécialisations</label>
+          <div class="col-md-6">
+            <mat-select formControlName="specialisation" class="form-control" multiple>
+              <mat-option *ngFor="let specialisation of specialisations" [value]="specialisation.code">
+                {{ specialisation.nom }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <div class="form-group row" *ngIf="roleSelected === 'ROLE_MEDECIN'">
+          <label class="col-md-3 col-form-label">Structure</label>
+          <div class="col-md-6">
+            <mat-select formControlName="structure" class="form-control">
+              <mat-option *ngFor="let structure of structures" [value]="structure.code">
+                {{ structure.nom }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <!--
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="file-input" required
+              >Image</label
+            >
+            <div class="col-md-9">
+              <input
+                type="file"
+                id="image"
+                formControlName="image"
+                (change)="handleFileInput($event.target.files)"
+              />
+            </div>
+          </div>
+          -->
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i>Enregistrer
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #update>
+  <div class="card">
+    <div class="card-header">
+      <strong>Modification Catégorie</strong>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="utilisateurForm" (ngSubmit)="onUpdate()" class="form-horizontal">
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
+          <div class="col-md-9">
+            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
+          <div class="col-md-9">
+            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
+          <div class="col-md-9">
+            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
+          <div class="col-md-9">
+            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
+              required />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="textarea-input">Description</label>
+          <div class="col-md-9">
+            <textarea id="description" formControlName="description" rows="9" class="form-control"
+              placeholder="Description" required></textarea>
+          </div>
+        </div>
+        <div class="form-group row">
+          <img class="img-thumbnail" [src]="selectedutilisateur.image" alt="Colorlib Template" />
+          <label class="col-md-3 col-form-label" for="file-input" required>Image</label>
+          <div class="col-md-9">
+            <input type="file" id="image" formControlName="image" (change)="handleFileInput($event.target.files)" />
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i>Modifier
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>
+<ng-template #banir>
+  <div class="modal-body text-center">
+    <p>Voulez-vous bannir l'utilisateur de la plateforme</p>
+    <button type="button" class="btn btn-danger" (click)="confirmBanir()">
+      OUI
+    </button>
+    <button type="button" class="btn btn-default" (click)="decline()">
+      NON
+    </button>
+  </div>
+</ng-template>

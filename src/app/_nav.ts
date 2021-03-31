@@ -17,12 +17,17 @@ export const navItems: INavData[] = [
   {
     name: 'News',
     url: '/theme/news',
-    icon: 'icon-drop'
+    icon: 'fa fa-book fa-lg mt-4'
   },
   {
     name: 'Utilisateurs',
     url: '/theme/utilisateur',
-    icon: 'icon-pencil'
+    icon: 'icon-user'
+  },
+  {
+    name: 'Autres Services',
+    url: '/theme/autres',
+    icon: 'fa fa-server fa-lg mt-4'
   },
   {
     title: true,

@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-md-4 col-sm-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="text-muted small text-uppercase font-weight-bold">Rôles</div>
+                <div class="h2 py-3" *ngIf="roles">{{roles.length}}</div>
+                <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="text-muted small text-uppercase font-weight-bold">Spécialisations</div>
+                <div class="h2 py-3" *ngIf="specialisations">{{specialisations.length}}</div>
+                <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-2">
+        <div class="card">
+            <div class="card-body text-center">
+                <div class="text-muted small text-uppercase font-weight-bold">Structures Sanitaires</div>
+                <div class="h2 py-3" *ngIf="structuresSanitaires">{{structuresSanitaires.length}}</div>
+                <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Rôles
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let role of roles">
+                            <td>{{role.code}}</td>
+                            <td>{{role.nom}}</td>
+                            <td>
+                                <button type="button" class="btn btn-square btn-danger" (click)="deleteRole(role.code)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Spécialisations
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let specialisation of specialisations">
+                            <td>{{specialisation.code}}</td>
+                            <td>{{specialisation.nom}}</td>
+                            <td>
+                                <button type="button" class="btn btn-square btn-danger" (click)="deleteSpecialisation(specialisation.code)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <i class="fa fa-align-justify"></i> Structures Sanitaires
+            </div>
+            <div class="card-body">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom</th>
+                            <th>Ville</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let structure of structuresSanitaires">
+                            <td>{{structure.code}}</td>
+                            <td>{{structure.nom}}</td>
+                            <td>{{structure.ville}}</td>
+                            <td>
+                                <button type="button" class="btn btn-square btn-danger" (click)="deleteStructureSanitaire(structure.code)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+        </div>
+    </div>
+</div>
