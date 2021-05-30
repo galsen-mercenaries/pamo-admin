@@ -29,7 +29,7 @@
               <td>{{ user.prenom }}</td>
               <td>{{ user.nom }}</td>
               <td>{{ user.email }}</td>
-              <td>{{ user.role }}</td>
+              <td>{{ user?.role?.nom }}</td>
               <td>{{ user.numero }}</td>
               <td>{{ user.adresse }}</td>
               <td>
@@ -37,14 +37,13 @@
                 <span *ngIf="user.account_status == true" class="badge badge-success">Validé</span>
               </td>
               <td>
-                <button type="button" class="btn btn-square btn-primary" (click)="readutilisateur(user.email)">
+                <button type="button" class="btn btn-square btn-primary">
                   <i class="fa fa-eye"></i>
                 </button>
-                <button type="button" class="btn btn-square btn-success"
-                  (click)="updateutilisateur(user.email, update)">
+                <button type="button" class="btn btn-square btn-success">
                   <i class="fa fa-pencil-square-o"></i>
                 </button>
-                <button type="button" class="btn btn-square btn-danger" (click)="banUtilisateur(user.email,banir)">
+                <button type="button" class="btn btn-square btn-danger">
                   <i class="fa fa-ban"></i>
                 </button>
               </td>
@@ -156,64 +155,7 @@
     </div>
   </div>
 </ng-template>
-<ng-template #update>
-  <div class="card">
-    <div class="card-header">
-      <strong>Modification Catégorie</strong>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="utilisateurForm" (ngSubmit)="onUpdate()" class="form-horizontal">
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
-          <div class="col-md-9">
-            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
-          <div class="col-md-9">
-            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
-          <div class="col-md-9">
-            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Nom catégorie</label>
-          <div class="col-md-9">
-            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom catégorie"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="textarea-input">Description</label>
-          <div class="col-md-9">
-            <textarea id="description" formControlName="description" rows="9" class="form-control"
-              placeholder="Description" required></textarea>
-          </div>
-        </div>
-        <div class="form-group row">
-          <img class="img-thumbnail" [src]="selectedutilisateur.image" alt="Colorlib Template" />
-          <label class="col-md-3 col-form-label" for="file-input" required>Image</label>
-          <div class="col-md-9">
-            <input type="file" id="image" formControlName="image" (change)="handleFileInput($event.target.files)" />
-          </div>
-        </div>
-        <div class="card-footer">
-          <button type="submit" class="btn btn-sm btn-primary">
-            <i class="fa fa-dot-circle-o"></i>Modifier
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</ng-template>
+
 <ng-template #banir>
   <div class="modal-body text-center">
     <p>Voulez-vous bannir l'utilisateur de la plateforme</p>

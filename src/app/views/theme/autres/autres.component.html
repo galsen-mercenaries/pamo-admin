@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <div class="text-muted small text-uppercase font-weight-bold">Rôles</div>
-                <div class="h2 py-3" *ngIf="roles">{{roles.length}}</div>
+                <div class="h2 py-3" *ngIf="roles">{{roles?.length}}</div>
                 <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
                 </div>
             </div>
@@ -13,7 +13,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <div class="text-muted small text-uppercase font-weight-bold">Spécialisations</div>
-                <div class="h2 py-3" *ngIf="specialisations">{{specialisations.length}}</div>
+                <div class="h2 py-3" *ngIf="specialisations">{{specialisations?.length}}</div>
                 <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="card">
             <div class="card-body text-center">
                 <div class="text-muted small text-uppercase font-weight-bold">Structures Sanitaires</div>
-                <div class="h2 py-3" *ngIf="structuresSanitaires">{{structuresSanitaires.length}}</div>
+                <div class="h2 py-3" *ngIf="structuresSanitaires">{{structuresSanitaires?.length}}</div>
                 <div class="chart-wrapper mx-auto" style="height:40px;width:80px;">
                 </div>
             </div>
@@ -56,7 +56,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table> 
+                </table>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table> 
+                </table>
             </div>
         </div>
     </div>
@@ -116,7 +116,7 @@
                             </td>
                         </tr>
                     </tbody>
-                </table> 
+                </table>
             </div>
         </div>
     </div>

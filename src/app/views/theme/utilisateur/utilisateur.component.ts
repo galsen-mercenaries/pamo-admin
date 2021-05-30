@@ -1,8 +1,8 @@
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
-import { UtilisateurService } from "./utilisateur.service"
 import { SharedService } from '../../shared/shared.service'
+import { UtilisateurService } from './user-service/utilisateur.service';
 
 @Component({
   selector: 'app-utilisateur',
@@ -10,7 +10,7 @@ import { SharedService } from '../../shared/shared.service'
   styleUrls: ['./utilisateur.component.scss']
 })
 export class UtilisateurComponent implements OnInit {
-  
+
   users : any
   userCount : any
   roleSelected : ''
@@ -40,9 +40,9 @@ export class UtilisateurComponent implements OnInit {
     this.getStructures()
     this.getSpecialisation()
     this.getUtilisateurs()
-    
+
   }
-  
+
   getRoles(){
     this.sharedService.getRoles().subscribe(
       (data) => {
@@ -54,7 +54,7 @@ export class UtilisateurComponent implements OnInit {
 
   getSpecialisation(){
     this.sharedService.getSpecialisations().subscribe(
-      (data) =>{ 
+      (data) =>{
         console.log(data)
         this.specialisations = data
       }
@@ -95,7 +95,7 @@ export class UtilisateurComponent implements OnInit {
   }
   getUtilisateurs(){
     this.utilisateurService.getUtilisateurs().subscribe(
-      (data) =>{ 
+      (data) =>{
         this.users = data
         console.log(data)
         this.countUserByRole(this.users)
@@ -107,7 +107,7 @@ export class UtilisateurComponent implements OnInit {
     this.userCount = this.sharedService.groupArrayOfObjects(data,'role')
     console.log(this.userCount)
   }
-  
+
   readutilisateur(user){
     console.log(user)
   }
@@ -130,8 +130,8 @@ export class UtilisateurComponent implements OnInit {
       }
     )
   }
-  
-  decline(){
 
-  }
+  onUpdate() {}
+
+  decline() {}
 }
