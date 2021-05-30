@@ -1,5 +1,5 @@
 <div class="row">
-  <button mat-raised-button color="primary" (click)="openModal(template)">
+  <button mat-raised-button color="primary" (click)="openDialogUser(null, 'create')">
     <i class="fa fa-plus"></i> Nouvel Utilisateur
   </button>
 </div>
@@ -17,6 +17,7 @@
               <th>Prénom</th>
               <th>Nom</th>
               <th>Email</th>
+              <th>Date Création</th>
               <th>Rôle</th>
               <th>Numéro</th>
               <th>Adresse</th>
@@ -29,6 +30,7 @@
               <td>{{ user.prenom }}</td>
               <td>{{ user.nom }}</td>
               <td>{{ user.email }}</td>
+              <td>{{ user?.date_creation | date: 'dd-MMMM-yyyy à HH:mm' }}</td>
               <td>{{ user?.role?.nom }}</td>
               <td>{{ user.numero }}</td>
               <td>{{ user.adresse }}</td>
@@ -37,10 +39,10 @@
                 <span *ngIf="user.account_status == true" class="badge badge-success">Validé</span>
               </td>
               <td>
-                <button type="button" class="btn btn-square btn-primary">
+                <button (click)="openDialogUser(user, 'see')" type="button" class="btn btn-square btn-primary">
                   <i class="fa fa-eye"></i>
                 </button>
-                <button type="button" class="btn btn-square btn-success">
+                <button (click)="openDialogUser(user, 'edit')" type="button" class="btn btn-square btn-success">
                   <i class="fa fa-pencil-square-o"></i>
                 </button>
                 <button type="button" class="btn btn-square btn-danger">

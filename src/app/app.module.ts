@@ -4,7 +4,6 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
@@ -46,8 +45,6 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
-import { NewsComponent } from './views/theme/news/news.component';
-import { UtilisateurComponent } from './views/theme/utilisateur/utilisateur.component';
 import { AuthInterceptor } from './intherceptor/auth.interceptor';
 
 @NgModule({
@@ -81,9 +78,7 @@ import { AuthInterceptor } from './intherceptor/auth.interceptor';
     P404Component,
     P500Component,
     LoginComponent,
-    NewsComponent,
-    UtilisateurComponent
-  ],
+    ],
   providers: [
     {
       provide: LocationStrategy,

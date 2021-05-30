@@ -1,7 +1,10 @@
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
+import { UserModel } from '../../../models/user.model';
 import { SharedService } from '../../shared/shared.service'
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UtilisateurService } from './user-service/utilisateur.service';
 
 @Component({
@@ -31,9 +34,9 @@ export class UtilisateurComponent implements OnInit {
   specialisations : any
   structures : any
   selectedUser : any
-
+  userDialogRef: MatDialogRef<EditUserComponent>;
   constructor(private modalService: BsModalService, private formBuilder : FormBuilder
-    ,private utilisateurService : UtilisateurService, private sharedService : SharedService) { }
+    ,private utilisateurService : UtilisateurService, private sharedService : SharedService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getRoles()
@@ -46,7 +49,6 @@ export class UtilisateurComponent implements OnInit {
   getRoles(){
     this.sharedService.getRoles().subscribe(
       (data) => {
-        console.log(data)
         this.roles = data
       }
     )
@@ -55,7 +57,6 @@ export class UtilisateurComponent implements OnInit {
   getSpecialisation(){
     this.sharedService.getSpecialisations().subscribe(
       (data) =>{
-        console.log(data)
         this.specialisations = data
       }
     )
@@ -65,7 +66,6 @@ export class UtilisateurComponent implements OnInit {
     this.sharedService.getStructures().subscribe(
       (data) => {
         this.structures = data
-        console.log(data)
       }
     )
   }
@@ -74,6 +74,13 @@ export class UtilisateurComponent implements OnInit {
   }
   onRoleChange(value){
     this.roleSelected = value
+  }
+
+  openDialogUser(user: UserModel, mode?: 'edit' | 'see' | 'create') {
+    this.userDialogRef = this.matDialog.open(EditUserComponent, {
+      data: { user, mode },
+      width: '450px'
+    });
   }
 
   onSubmit(){
