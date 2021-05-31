@@ -1,19 +1,10 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
+  "name": "pamo-admin",
   "version": "2.10.0",
-  "description": "CoreUI Free Angular 10 Admin Template",
+  "description": "Admin Interface of the PAMO plateforme",
   "author": {
-    "name": "Łukasz Holeczek",
-    "url": "http://holeczek.pl",
-    "github": "https://github.com/mrholek",
-    "twitter": "https://twitter.com/lukaszholeczek"
+    "name": "Galsen Mercenaries"
   },
-  "contributors": [
-    {
-      "name": "Andrzej Kopański",
-      "url": "https://github.com/xidedix"
-    }
-  ],
   "homepage": "https://coreui.io/angular",
   "copyright": "Copyright 2021 creativeLabs Łukasz Holeczek",
   "license": "MIT",
@@ -55,6 +46,7 @@
     "ngx-bootstrap": "^6.2.0",
     "ngx-perfect-scrollbar": "^10.1.0",
     "rxjs": "^6.6.3",
+    "secure-ls": "^1.2.6",
     "simple-line-icons": "^2.5.5",
     "ts-helpers": "^1.1.2",
     "tslib": "^2.0.0",

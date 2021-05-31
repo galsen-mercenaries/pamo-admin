@@ -12,11 +12,11 @@ export class AutresService {
   constructor(private httpClient : HttpClient) { }
 
   getSpecialisations() : Observable<any>{
-    return this.httpClient.get(environment.baseUrl+'specialisation')
+    return this.httpClient.get(environment.baseUrl+'specialisations')
   }
 
   getStructureSanitaire() : Observable<any>{
-    return this.httpClient.get(environment.baseUrl+'structure-sante')
+    return this.httpClient.get(environment.baseUrl+'structure-sanitaires')
   }
 
   getRoles() : Observable<any>{

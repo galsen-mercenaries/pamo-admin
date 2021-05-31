@@ -17,11 +17,11 @@ export class SharedService {
   }
 
   getSpecialisations(): Observable<any>{
-    return this.http.get(environment.baseUrl+"specialisation")
+    return this.http.get(environment.baseUrl+"specialisations")
   }
 
   getStructures() : Observable<any>{
-    return this.http.get(environment.baseUrl+"structure-sante")
+    return this.http.get(environment.baseUrl+"structure-sanitaires")
   }
 
   groupArrayOfObjects(list, key) {
@@ -49,5 +49,5 @@ export class SharedService {
 
     return objets;
   }
-  
+
 }

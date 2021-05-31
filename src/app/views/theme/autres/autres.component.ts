@@ -21,7 +21,6 @@ export class AutresComponent implements OnInit {
   getSpecialisations(){
     this.autresService.getSpecialisations().subscribe(
       (data) =>{
-        console.log(data)
         this.specialisations = data
       });
   }
@@ -29,7 +28,6 @@ export class AutresComponent implements OnInit {
   getRoles(){
     this.autresService.getRoles().subscribe(
       (data) =>{
-        console.log(data)
         this.roles = data
       });
   }
@@ -37,7 +35,6 @@ export class AutresComponent implements OnInit {
   getStructureSanitaire(){
     this.autresService.getStructureSanitaire().subscribe(
       (data) =>{
-        console.log(data)
         this.structuresSanitaires = data
       });
   }

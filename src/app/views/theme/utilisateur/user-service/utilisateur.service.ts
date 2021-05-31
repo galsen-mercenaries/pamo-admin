@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class UtilisateurService {
   constructor(private httpClient : HttpClient) { }
 
   getUtilisateurs() : Observable<any>{
-    return this.httpClient.get<any>(environment.baseUrl+"users")
+    return this.httpClient.get<any>(environment.baseUrl+"users?filter[include][0]=role")
   }
 
   addUtilisateur(utilisateur) : Observable<any>{
