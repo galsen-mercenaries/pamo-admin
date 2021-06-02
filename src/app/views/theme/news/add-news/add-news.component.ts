@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../shared/shared.service';
 import { NewsService } from '../news.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class AddNewsComponent implements OnInit {
   private selectedFile : any
   private base64textString: String = "";
 
-  constructor(private formBuilder : FormBuilder,private router : Router, private newsService : NewsService) { }
+  constructor(private formBuilder : FormBuilder,
+    private router : Router, 
+    private newsService : NewsService,
+    private sharedService : SharedService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +33,7 @@ export class AddNewsComponent implements OnInit {
     
     if (files && file) {
       console.log(file)
-      
+      console.log(file.size)
       this.selectedFile = file
       console.log(this.selectedFile)
     }

@@ -49,5 +49,9 @@ export class SharedService {
 
     return objets;
   }
+
+  checkFileSize(file : any) {
+    return (file.size > environment.fileMaxSize ? true : false)
+  }
   
 }
