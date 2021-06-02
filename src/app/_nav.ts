@@ -12,7 +12,7 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'LES ENTITIES DANS PAMO'
   },
   {
     name: 'News',
@@ -20,12 +20,22 @@ export const navItems: INavData[] = [
     icon: 'fa fa-book fa-lg mt-4'
   },
   {
-    name: 'Utilisateurs',
+    name: 'Les Utilisateurs',
     url: '/theme/utilisateur',
     icon: 'icon-user'
   },
   {
-    name: 'Autres Services',
+    name: 'Les Roles',
+    url: '/theme/autres',
+    icon: 'fa fa-server fa-lg mt-4'
+  },
+  {
+    name: 'Les Structure Sanitaires',
+    url: '/theme/autres',
+    icon: 'fa fa-server fa-lg mt-4'
+  },
+  {
+    name: 'Les Spécialités des Medecins',
     url: '/theme/autres',
     icon: 'fa fa-server fa-lg mt-4'
   },

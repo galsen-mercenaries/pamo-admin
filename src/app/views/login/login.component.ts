@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
-import { LoginService } from './login.service';
+import { AuthenticationService } from '../../services/authentication/authentication.service';
 
 
 @Component({
@@ -17,15 +17,14 @@ export class LoginComponent {
   })
 
   constructor(private formBuilder : FormBuilder, private router : Router,
-    private loginService : LoginService) { }
- 
+    private authServ : AuthenticationService) { }
+
   onSubmit(){
     this.router.navigate(['dashboard'])
     /*
     var userData = this.loginForm.value
-    this.loginService.userLogin(userData).subscribe(
-      (res) => {
-        localStorage.setItem('token', res['access_token']);
+    this.authServ.userLogin(userData).subscribe(
+      (res: any) => {
         this.router.navigate(['dashboard'])
       },
       (err) => {

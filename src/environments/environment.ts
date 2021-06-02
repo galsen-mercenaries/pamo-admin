@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  baseUrl : "http://ec2-15-188-193-194.eu-west-3.compute.amazonaws.com:8080/",
-  fileMaxSize : 50000000
+  fileMaxSize : 50000000,
+  baseUrl : "http://ec2-15-188-193-194.eu-west-3.compute.amazonaws.com:8080/"
 };

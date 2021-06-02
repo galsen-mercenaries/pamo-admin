@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { AuthGuard } from './utils/auth-guard/auth.guard';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -12,7 +13,6 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    //component: LoginComponent,
     pathMatch: 'full',
   },
   {
@@ -39,6 +39,7 @@ export const routes: Routes = [
   {
     path: 'news',
     component: NewsComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'News Page'
     }
@@ -46,6 +47,7 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
+    canActivate: [AuthGuard],
     data: {
       title: 'Home'
     },
