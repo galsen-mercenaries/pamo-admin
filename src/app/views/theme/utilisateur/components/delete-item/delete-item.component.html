@@ -1,9 +1,12 @@
 <div class="modal-body text-center">
-    <p>Voulez-vous bannir l'utilisateur de la plateforme</p>
+    <p>Voulez-vous bannir l'utilisateur {{ data?.user?.email }} de la plateforme</p>
     <button type="button" class="btn btn-danger" (click)="confirmBanir()">
       OUI
     </button>
     <button type="button" class="btn btn-default" (click)="decline()">
       NON
     </button>
+  </div>
+  <div>
+  {{ errorMsg }}
   </div>

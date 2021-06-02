@@ -4,6 +4,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 import { UserModel } from '../../../models/user.model';
 import { SharedService } from '../../shared/shared.service'
+import { DeleteItemComponent } from './components/delete-item/delete-item.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UtilisateurService } from './user-service/utilisateur.service';
 
@@ -14,7 +15,7 @@ import { UtilisateurService } from './user-service/utilisateur.service';
 })
 export class UtilisateurComponent implements OnInit {
 
-  users : any
+  users : UserModel[]
   userCount : any
   roleSelected : ''
 
@@ -83,6 +84,14 @@ export class UtilisateurComponent implements OnInit {
     });
   }
 
+  deactiveUser(user: UserModel) {
+    user.account_status = false;
+    this.matDialog.open(DeleteItemComponent, {
+      data: { user },
+      width: '450px'
+    });
+  }
+
   onSubmit(){
     var utilisateur = this.utilisateurForm.value
     if(utilisateur.role!="ROLE_MEDECIN"){
@@ -115,30 +124,4 @@ export class UtilisateurComponent implements OnInit {
     console.log(this.userCount)
   }
 
-  readutilisateur(user){
-    console.log(user)
-  }
-  updateutilisateur(user,action){
-    console.log(user)
-  }
-  banUtilisateur(user, template){
-    this.selectedUser = user
-    this.modalRef = this.modalService.show(template)
-  }
-
-  confirmBanir(){
-    this.utilisateurService.banUtilisateur(this.selectedUser).subscribe(
-      (res) => {
-        this.getUtilisateurs()
-        this.modalRef.hide()
-      },
-      (err) =>{
-        console.log(err)
-      }
-    )
-  }
-
-  onUpdate() {}
-
-  decline() {}
 }

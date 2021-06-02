@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { RoleModel } from '../../../models/role.model';
+import { SpecialisationModel } from '../../../models/specialisation.model';
+import { StructureSanitaireModel } from '../../../models/structureSanitaire.model';
 import { AutresService } from './autres.service';
+import { ItemsFormulaireComponent } from './components/items-formulaire/items-formulaire.component';
 AutresService
 
 @Component({
@@ -8,11 +13,13 @@ AutresService
   styleUrls: ['./autres.component.scss']
 })
 export class AutresComponent implements OnInit {
-  specialisations : any
-  roles : any
-  structuresSanitaires : any
-
-  constructor(private autresService : AutresService) { }
+  specialisations : SpecialisationModel[] = [];
+  roles : RoleModel[] = [];
+  structuresSanitaires : StructureSanitaireModel[] = [];
+  displayeRoledColumns: string[] = ['nom', 'code', 'select'];
+  displayeSpecialisationColumns: string[] = ['nom', 'code', 'select'];
+  displayStructureSanColumn: string[] = ['nom', 'code', 'ville', 'select'];
+  constructor(private autresService : AutresService, private matDialog: MatDialog) { }
 
   ngOnInit(): void {
     this.unitFunction()
@@ -48,4 +55,10 @@ export class AutresComponent implements OnInit {
   deleteSpecialisation(code){}
   deleteStructureSanitaire(code){}
 
+  openDialog(mode: 'edit' | 'see' | 'create', type: 'role' | 'specialisation' | 'structureSanitaire', item?: any) {
+    this.matDialog.open(ItemsFormulaireComponent, {
+      data: { item, mode, type },
+      width: '450px'
+    });
+  }
 }

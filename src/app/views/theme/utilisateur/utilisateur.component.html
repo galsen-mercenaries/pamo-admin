@@ -27,13 +27,13 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of users">
-              <td>{{ user.prenom }}</td>
-              <td>{{ user.nom }}</td>
-              <td>{{ user.email }}</td>
+              <td>{{ user?.prenom }}</td>
+              <td>{{ user?.nom }}</td>
+              <td>{{ user?.email }}</td>
               <td>{{ user?.date_creation | date: 'dd-MMMM-yyyy à HH:mm' }}</td>
               <td>{{ user?.role?.nom }}</td>
-              <td>{{ user.numero }}</td>
-              <td>{{ user.adresse }}</td>
+              <td>{{ user?.numero }}</td>
+              <td>{{ user?.adresse }}</td>
               <td>
                 <span *ngIf="user.account_status == false" class="badge badge-warning">En attente</span>
                 <span *ngIf="user.account_status == true" class="badge badge-success">Validé</span>
@@ -45,7 +45,7 @@
                 <button (click)="openDialogUser(user, 'edit')" type="button" class="btn btn-square btn-success">
                   <i class="fa fa-pencil-square-o"></i>
                 </button>
-                <button type="button" class="btn btn-square btn-danger">
+                <button (click)="deactiveUser(user)" class="btn btn-square btn-danger">
                   <i class="fa fa-ban"></i>
                 </button>
               </td>
@@ -56,116 +56,3 @@
     </div>
   </div>
 </div>
-<ng-template #template>
-  <div class="card">
-    <div class="card-header">
-      <strong>Ajout Utilisateur</strong>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="utilisateurForm" (ngSubmit)="onSubmit()" class="form-horizontal">
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Prénom</label>
-          <div class="col-md-9">
-            <input type="text" id="prenom" formControlName="prenom" class="form-control" placeholder="Prénom"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Nom</label>
-          <div class="col-md-9">
-            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom" required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Email</label>
-          <div class="col-md-9">
-            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Numero</label>
-          <div class="col-md-9">
-            <input type="text" id="numero" formControlName="numero" class="form-control" placeholder="numero"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Adresse</label>
-          <div class="col-md-9">
-            <input type="text" id="adresse" formControlName="adresse" class="form-control" placeholder="adresse"
-              required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Mot de passe</label>
-          <div class="col-md-9">
-            <input type="password" id="password" formControlName="password" class="form-control"
-              placeholder="Mot de passe" required />
-          </div>
-        </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="email-input">Role</label>
-          <div class="col-md-6">
-            <mat-select formControlName="role" class="form-control" (selectionChange)="onRoleChange($event.value)">
-              <mat-option *ngFor="let role of roles" [value]="role.code">
-                {{ role.nom }}
-              </mat-option>
-            </mat-select>
-          </div>
-        </div>
-        <div class="form-group row" *ngIf="roleSelected === 'ROLE_MEDECIN'">
-          <label class="col-md-3 col-form-label">Spécialisations</label>
-          <div class="col-md-6">
-            <mat-select formControlName="specialisation" class="form-control" multiple>
-              <mat-option *ngFor="let specialisation of specialisations" [value]="specialisation.code">
-                {{ specialisation.nom }}
-              </mat-option>
-            </mat-select>
-          </div>
-        </div>
-        <div class="form-group row" *ngIf="roleSelected === 'ROLE_MEDECIN'">
-          <label class="col-md-3 col-form-label">Structure</label>
-          <div class="col-md-6">
-            <mat-select formControlName="structure" class="form-control">
-              <mat-option *ngFor="let structure of structures" [value]="structure.code">
-                {{ structure.nom }}
-              </mat-option>
-            </mat-select>
-          </div>
-        </div>
-        <!--
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="file-input" required
-              >Image</label
-            >
-            <div class="col-md-9">
-              <input
-                type="file"
-                id="image"
-                formControlName="image"
-                (change)="handleFileInput($event.target.files)"
-              />
-            </div>
-          </div>
-          -->
-        <div class="card-footer">
-          <button type="submit" class="btn btn-sm btn-primary">
-            <i class="fa fa-dot-circle-o"></i>Enregistrer
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #banir>
-  <div class="modal-body text-center">
-    <p>Voulez-vous bannir l'utilisateur de la plateforme</p>
-    <button type="button" class="btn btn-danger" (click)="confirmBanir()">
-      OUI
-    </button>
-    <button type="button" class="btn btn-default" (click)="decline()">
-      NON
-    </button>
-  </div>
-</ng-template>
