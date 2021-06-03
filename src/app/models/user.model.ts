@@ -7,5 +7,6 @@ export interface UserModel {
     adresse?: string;
     role?: any;
     image?: string;
-    account_status: boolean;
+    account_status?: boolean;
+    date_creation?: string;
   }

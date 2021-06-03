@@ -56,9 +56,27 @@ export class AutresComponent implements OnInit {
   deleteStructureSanitaire(code){}
 
   openDialog(mode: 'edit' | 'see' | 'create', type: 'role' | 'specialisation' | 'structureSanitaire', item?: any) {
-    this.matDialog.open(ItemsFormulaireComponent, {
+   const matDialogRef = this.matDialog.open(ItemsFormulaireComponent, {
       data: { item, mode, type },
       width: '450px'
     });
+
+    matDialogRef.afterClosed().subscribe((res: {success: boolean})=> {
+      if(res && res.success) {
+        switch (type) {
+          case 'role':
+            this.getRoles();
+            break;
+          case 'specialisation':
+            this.getSpecialisations();
+            break;
+          case 'structureSanitaire':
+            this.getStructureSanitaire();
+            break;
+          default:
+            break;
+        }
+      }
+    })
   }
 }

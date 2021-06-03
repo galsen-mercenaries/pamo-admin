@@ -3,7 +3,14 @@
       <strong>Roles</strong>
     </div>
     <div class="card-body">
-      <form [formGroup]="roleForm"  class="form-horizontal">
+      <form [formGroup]="roleForm" (ngSubmit)="submit()"   class="form-horizontal">
+        <div *ngIf="data?.item?.roleId" class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">ID</label>
+          <div class="col-md-9">
+            <input disabled readonly type="text" id="roleId" formControlName="roleId" class="form-control" placeholder="Nom du role"
+              required  />
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="nom">Nom</label>
           <div class="col-md-9">
@@ -32,7 +39,14 @@
       <strong>Spécialisation</strong>
     </div>
     <div class="card-body">
-      <form [formGroup]="specialisationForm"  class="form-horizontal">
+      <form [formGroup]="specialisationForm" (ngSubmit)="submit()"  class="form-horizontal">
+        <div *ngIf="data?.item?.specialisationId" class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">ID</label>
+          <div class="col-md-9">
+            <input readonly type="text" id="specialisationId" formControlName="specialisationId" class="form-control"
+              required  />
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="nomSpec">Nom</label>
           <div class="col-md-9">
@@ -62,11 +76,18 @@
       <strong>Structure Sanitaire</strong>
     </div>
     <div class="card-body">
-      <form [formGroup]="structureSanitaireForm"  class="form-horizontal">
+      <form [formGroup]="structureSanitaireForm" (ngSubmit)="submit()" class="form-horizontal">
+        <div *ngIf="data?.item?.structuresanitaireId" class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">ID</label>
+          <div class="col-md-9">
+            <input readonly type="text" id="structuresanitaireId" formControlName="structuresanitaireId" class="form-control"
+              required  />
+          </div>
+        </div>
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="nom">Nom</label>
           <div class="col-md-9">
-            <input type="text" formControlName="nom" class="form-control" placeholder="Nom de la structure"
+            <input #nomSpecialite (input)="generateString(nomSpecialite.value)" type="text" formControlName="nom" class="form-control" placeholder="Nom de la structure"
               required  />
           </div>
         </div>
@@ -81,7 +102,7 @@
         <div class="form-group row">
           <label class="col-md-3 col-form-label" for="ville">Ville</label>
           <div class="col-md-9">
-            <input type="text" formControlName="ville" class="form-control" placeholder="Vile Structure"
+            <input type="text" formControlName="ville" class="form-control" placeholder="Ville Structure"
               required />
           </div>
         </div>
@@ -93,4 +114,11 @@
         </div>
       </form>
     </div>
+  </div>
+
+  <div *ngIf="hasError" class="error-msg">
+    Veuillez renseigner toutes les infos du formulaires avant de valider
+  </div>
+  <div *ngIf="hasErrorSubmitting" class="error-msg">
+    Une erreur est survenue lors du traitement de votre demande
   </div>
