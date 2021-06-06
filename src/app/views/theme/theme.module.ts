@@ -12,6 +12,10 @@ import { NewsComponent } from './news/news.component';
 import { EditUserComponent } from './utilisateur/components/edit-user/edit-user.component';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DeleteItemComponent } from './utilisateur/components/delete-item/delete-item.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ItemsFormulaireComponent } from './autres/components/items-formulaire/items-formulaire.component';
 
 @NgModule({
   imports: [
@@ -19,16 +23,20 @@ import { DeleteItemComponent } from './utilisateur/components/delete-item/delete
     ThemeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
-  entryComponents: [EditUserComponent, DeleteItemComponent],
+  entryComponents: [EditUserComponent, DeleteItemComponent, ItemsFormulaireComponent],
   declarations: [
     UtilisateurComponent,
     NewsComponent,
     AddNewsComponent,
     AutresComponent,
     EditUserComponent,
-    DeleteItemComponent
+    DeleteItemComponent,
+    ItemsFormulaireComponent
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
 })

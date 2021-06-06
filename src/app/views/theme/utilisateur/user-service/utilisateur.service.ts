@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
+import { UserModel } from '../../../../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class UtilisateurService {
     return this.httpClient.post(environment.baseUrl+"users",utilisateur)
   }
 
-  banUtilisateur(mail) : Observable<any>{
-    return this.httpClient.delete(environment.baseUrl+"users/"+mail)
+  banUtilisateur(user: UserModel) : Observable<any>{
+    return this.httpClient.patch(environment.baseUrl+"users/", user)
   }
 }

@@ -1,0 +1,124 @@
+<div *ngIf="data.type === 'role'" class="card">
+    <div class="card-header">
+      <strong>Roles</strong>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="roleForm" (ngSubmit)="submit()"   class="form-horizontal">
+        <div *ngIf="data?.item?.roleId" class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">ID</label>
+          <div class="col-md-9">
+            <input disabled readonly type="text" id="roleId" formControlName="roleId" class="form-control" placeholder="Nom du role"
+              required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">Nom</label>
+          <div class="col-md-9">
+            <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom du role"
+              required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="code">Code</label>
+          <div class="col-md-9">
+            <input type="text" id="code" formControlName="code" class="form-control" placeholder="Code role"
+              required />
+          </div>
+        </div>
+
+        <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+<div *ngIf="data.type === 'specialisation'" class="card">
+    <div class="card-header">
+      <strong>Spécialisation</strong>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="specialisationForm" (ngSubmit)="submit()"  class="form-horizontal">
+        <div *ngIf="data?.item?.specialisationId" class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">ID</label>
+          <div class="col-md-9">
+            <input readonly type="text" id="specialisationId" formControlName="specialisationId" class="form-control"
+              required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="nomSpec">Nom</label>
+          <div class="col-md-9">
+            <input type="text" id="nomSpec" formControlName="nom" class="form-control" placeholder="Nom specialisation"
+              required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="codeSpec">Code</label>
+          <div class="col-md-9">
+            <input type="text" id="codeSpec" formControlName="code" class="form-control" placeholder="Code specialisation"
+              required />
+          </div>
+        </div>
+
+        <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+<div *ngIf="data.type === 'structureSanitaire'" class="card">
+    <div class="card-header">
+      <strong>Structure Sanitaire</strong>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="structureSanitaireForm" (ngSubmit)="submit()" class="form-horizontal">
+        <div *ngIf="data?.item?.structuresanitaireId" class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">ID</label>
+          <div class="col-md-9">
+            <input readonly type="text" id="structuresanitaireId" formControlName="structuresanitaireId" class="form-control"
+              required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="nom">Nom</label>
+          <div class="col-md-9">
+            <input #nomSpecialite (input)="generateString(nomSpecialite.value)" type="text" formControlName="nom" class="form-control" placeholder="Nom de la structure"
+              required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="code">Code</label>
+          <div class="col-md-9">
+            <input type="text" formControlName="code" class="form-control" placeholder="Code Structure"
+              readonly />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="ville">Ville</label>
+          <div class="col-md-9">
+            <input type="text" formControlName="ville" class="form-control" placeholder="Ville Structure"
+              required />
+          </div>
+        </div>
+
+        <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
+          <button type="submit" class="btn btn-sm btn-primary">
+            <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="hasError" class="error-msg">
+    Veuillez renseigner toutes les infos du formulaires avant de valider
+  </div>
+  <div *ngIf="hasErrorSubmitting" class="error-msg">
+    Une erreur est survenue lors du traitement de votre demande
+  </div>
