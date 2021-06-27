@@ -20,8 +20,6 @@ export class LoginComponent {
     private authServ : AuthenticationService) { }
 
   onSubmit(){
-    this.router.navigate(['dashboard'])
-    /*
     var userData = this.loginForm.value
     this.authServ.userLogin(userData).subscribe(
       (res: any) => {
@@ -32,6 +30,6 @@ export class LoginComponent {
         this.isError = true
       }
     )
-    */
+    
   }
 }
