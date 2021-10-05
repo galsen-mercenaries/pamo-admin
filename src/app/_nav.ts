@@ -35,8 +35,18 @@ export const navItems: INavData[] = [
     icon: 'fa fa-server fa-lg mt-4'
   },
   {
+    name: 'Meeting',
+    url: '/theme/meeting',
+    icon: 'fa fa-server fa-lg mt-4'
+  },
+  {
     name: 'Les Spécialités des Medecins',
     url: '/theme/autres',
+    icon: 'fa fa-server fa-lg mt-4'
+  },
+  {
+    name: 'Prestataires',
+    url: '/theme/prestataire',
     icon: 'fa fa-server fa-lg mt-4'
   },
   {

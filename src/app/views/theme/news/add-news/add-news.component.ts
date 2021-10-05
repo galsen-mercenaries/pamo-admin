@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SharedService } from '../../../shared/shared.service';
 import { NewsService } from '../news.service';
 
 @Component({
@@ -11,14 +12,18 @@ import { NewsService } from '../news.service';
 export class AddNewsComponent implements OnInit {
   newForm = this.formBuilder.group({
     titre : "",
+    categorie: "",
     contenu : "",
-    image_url : "",
-    is_actif : Boolean
+    imageUrl : "",
+    isActif : Boolean
   });
   private selectedFile : any
   private base64textString: String = "";
 
-  constructor(private formBuilder : FormBuilder,private router : Router, private newsService : NewsService) { }
+  constructor(private formBuilder : FormBuilder,
+    private router : Router, 
+    private newsService : NewsService,
+    private sharedService : SharedService) { }
 
   ngOnInit(): void {
   }
@@ -29,7 +34,7 @@ export class AddNewsComponent implements OnInit {
     
     if (files && file) {
       console.log(file)
-      
+      console.log(file.size)
       this.selectedFile = file
       console.log(this.selectedFile)
     }
@@ -52,7 +57,8 @@ export class AddNewsComponent implements OnInit {
     this.newsService.UploadImage(formData).subscribe(
       (res) => {
         console.log(res)
-        data['image_url'] = res
+        data['imageUrl'] = res['Location']
+        console.log(data)
         this.newsService.addNews(data).subscribe(
           (res) =>{
             console.log(res)
@@ -65,7 +71,7 @@ export class AddNewsComponent implements OnInit {
       }
     )
     //data["image_url"] = "data:image/png;base64," + this.base64textString;
-    console.log(data)
+    //console.log(data)
     
   }
 
