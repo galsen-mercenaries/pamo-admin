@@ -24,6 +24,11 @@ export class NewsService {
   }
 
   UploadImage(formData):Observable<any>{
-    return this.httpClient.post<any>(environment.baseUrl+"file/upload",formData)
+    return this.httpClient.post<any>(environment.baseUrl+"files",formData)
+  }
+
+  countNewsByStatut(status) : Observable<any>{
+    var url = environment.baseUrl+"news/count?[where][isActif]="+status
+    return this.httpClient.get<any>(url)
   }
 }

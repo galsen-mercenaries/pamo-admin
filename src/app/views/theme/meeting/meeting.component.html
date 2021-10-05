@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-handshake-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-primary mb-0 pt-3">{{confirmedMeeting+pendingMeeting+canceledMeeting}}</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">Nombre de RV</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-handshake-o bg-success p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-info mb-0 pt-3">{{confirmedMeeting}}</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">RV effectués</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-handshake-o bg-warning p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-warning mb-0 pt-3">{{pendingMeeting}}</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">RV en attente</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i class="fa fa-handshake-o bg-danger p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-danger mb-0 pt-3">{{canceledMeeting}}</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">RV annulé</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+      <label for="statut_rv">Status Rendez-vous</label>
+      <select class="form-control" [(ngModel)]="meetingStatus" id="statut_rv" (change)="selectMeetingStatus()">
+        <option value="CONFIRMED">Rendez-vous confirmés</option>  
+        <option value="CANCELED">Rendez-vous annulés</option>
+        <option value="PENDING">Rendez-vous en attente validation</option></select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6 col-md-4"
+        *ngFor="let meeting of Meetings | paginate: {itemsPerPage: pagelimit, currentPage: p, totalItems: totalMeetings}">
+        <div class="card">
+            <div class="card-header"> {{meeting.datePatient}}<div class="card-header-actions"><span
+                        class="badge badge-success">{{meeting.status}}</span></div>
+            </div>
+            <div class="card-body">
+                <div *ngIf="meeting.medecin">
+                    <ul>
+                        <li>Médecin : {{meeting.medecin.user.prenom}} {{meeting.medecin.user.nom}} </li>
+                        <li>Structure sanitaire : {{meeting.medecin.structuresanitaire.nom}}</li>
+                    </ul>
+                    <hr class="dl-divider" aria-hidden="true">
+                </div>
+                <div>
+                    <ul>
+                        <li>Patient : {{meeting.prenomPatient}} {{meeting.nomPatient}} </li>
+                        <li>Numéro téléphone : 774774983</li>
+                    </ul>
+                    <hr class="dl-divider" aria-hidden="true">
+                </div>
+            </div>
+            <div class="card-footer text-muted">
+                Modifier/Annuler
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+</div>

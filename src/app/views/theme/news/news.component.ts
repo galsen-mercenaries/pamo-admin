@@ -12,13 +12,16 @@ import { BsModalService, BsModalRef } from "ngx-bootstrap/modal";
 export class NewsComponent implements OnInit {
   news : any
   modalRef: BsModalRef;
-  selectedNew : any
+  selectedNew : any;
+  newsAttente : number = 0
+  newsPublie : number = 0
   
 
   constructor(private modalService: BsModalService,private newsService : NewsService, private sharedService : SharedService, private router : Router) { }
 
   ngOnInit(): void {
-    this.getNews()
+    this.getNews();
+    this.countNewsByStatus()
   }
 
 
@@ -29,7 +32,7 @@ export class NewsComponent implements OnInit {
   getNews(){
     this.newsService.getNews().subscribe(
       (res) => {
-       this.news = this.sharedService.generateImages(res)
+       this.news = res
        console.log(this.news)
       }
       )
@@ -46,6 +49,10 @@ export class NewsComponent implements OnInit {
         console.log(res)
         this.getNews()
         this.modalRef.hide()
+        this.newsPublie = this.newsPublie-1
+        this.newsAttente = this.newsAttente-1
+        //this.newsPublie = this.newsPublie-1
+        //this.newsAttente = this.newsAttente-1
       },
       (err) =>{
         console.log(err)
@@ -54,5 +61,20 @@ export class NewsComponent implements OnInit {
   }
   decline(){
     this.modalRef.hide()
+  }
+
+  countNewsByStatus(){
+    this.newsService.countNewsByStatut(false).subscribe(
+      (res) => {
+        this.newsAttente = res.count
+        console.log(this.newsAttente)
+      }
+    )
+    this.newsService.countNewsByStatut(true).subscribe(
+      (res) => {
+        this.newsPublie = res.count
+        console.log(this.newsPublie)
+      }
+    )  
   }
 }

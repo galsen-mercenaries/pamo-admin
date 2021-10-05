@@ -12,9 +12,10 @@ import { NewsService } from '../news.service';
 export class AddNewsComponent implements OnInit {
   newForm = this.formBuilder.group({
     titre : "",
+    categorie: "",
     contenu : "",
-    image_url : "",
-    is_actif : Boolean
+    imageUrl : "",
+    isActif : Boolean
   });
   private selectedFile : any
   private base64textString: String = "";
@@ -56,7 +57,8 @@ export class AddNewsComponent implements OnInit {
     this.newsService.UploadImage(formData).subscribe(
       (res) => {
         console.log(res)
-        data['image_url'] = res
+        data['imageUrl'] = res['Location']
+        console.log(data)
         this.newsService.addNews(data).subscribe(
           (res) =>{
             console.log(res)
@@ -69,7 +71,7 @@ export class AddNewsComponent implements OnInit {
       }
     )
     //data["image_url"] = "data:image/png;base64," + this.base64textString;
-    console.log(data)
+    //console.log(data)
     
   }
 

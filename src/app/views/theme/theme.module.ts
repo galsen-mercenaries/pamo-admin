@@ -16,9 +16,16 @@ import {MatCardModule} from '@angular/material/card';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ItemsFormulaireComponent } from './autres/components/items-formulaire/items-formulaire.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MeetingComponent } from './meeting/meeting.component';
+import { EditMeetingComponent } from './meeting/components/edit-meeting/edit-meeting.component';
+import { DeleteMeetingComponent } from './meeting/components/delete-meeting/delete-meeting.component';
+import { PrestataireComponent } from './prestataire/prestataire.component';
+import { AddPrestataireComponent } from './prestataire/components/add-prestataire/add-prestataire.component';
+import { DeletePrestataireComponent } from './prestataire/components/delete-prestataire/delete-prestataire.component';
+import { EditPrestataireComponent } from './prestataire/components/edit-prestataire/edit-prestataire.component';
 @NgModule({
-  imports: [
+  imports: [ 
     CommonModule,
     ThemeRoutingModule,
     FormsModule,
@@ -26,7 +33,8 @@ import { ItemsFormulaireComponent } from './autres/components/items-formulaire/i
     MatDialogModule,
     MatCardModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgxPaginationModule
   ],
   entryComponents: [EditUserComponent, DeleteItemComponent, ItemsFormulaireComponent],
   declarations: [
@@ -36,7 +44,14 @@ import { ItemsFormulaireComponent } from './autres/components/items-formulaire/i
     AutresComponent,
     EditUserComponent,
     DeleteItemComponent,
-    ItemsFormulaireComponent
+    ItemsFormulaireComponent,
+    MeetingComponent,
+    EditMeetingComponent,
+    DeleteMeetingComponent,
+    PrestataireComponent,
+    AddPrestataireComponent,
+    DeletePrestataireComponent,
+    EditPrestataireComponent
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
 })

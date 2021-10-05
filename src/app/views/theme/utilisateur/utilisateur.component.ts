@@ -18,6 +18,8 @@ export class UtilisateurComponent implements OnInit {
   users : UserModel[]
   userCount : any
   roleSelected : ''
+  p: number = 1;
+  pagelimit: number = 6;
 
   modalRef: BsModalRef;
   utilisateurForm = this.formBuilder.group({
@@ -31,6 +33,7 @@ export class UtilisateurComponent implements OnInit {
     specialisation: [""],
     structure_sante : ""
   });
+  totalUsers:any;
   roles : any
   specialisations : any
   structures : any
@@ -43,7 +46,9 @@ export class UtilisateurComponent implements OnInit {
     this.getRoles()
     this.getStructures()
     this.getSpecialisation()
-    this.getUtilisateurs()
+    //this.getUtilisateurs()
+    this.getUserPagination(this.pagelimit,0)
+    this.countUsers()
 
   }
 
@@ -86,6 +91,7 @@ export class UtilisateurComponent implements OnInit {
 
   deactiveUser(user: UserModel) {
     user.account_status = false;
+    delete user['role']
     this.matDialog.open(DeleteItemComponent, {
       data: { user },
       width: '450px'
@@ -122,6 +128,29 @@ export class UtilisateurComponent implements OnInit {
   countUserByRole(data){
     this.userCount = this.sharedService.groupArrayOfObjects(data,'role')
     console.log(this.userCount)
+  }
+
+  getUserPagination(limit,skip){
+    this.utilisateurService.getUtilisateurPagination(limit,skip).subscribe(
+      (res)=>{
+        this.users = res
+      }
+    )
+  }
+
+  countUsers(){
+    this.utilisateurService.CountTotalUser().subscribe(
+      (res)=>{
+        this.totalUsers = res.count
+        console.log(res)
+      }
+    )
+  }
+
+  getPage(event){
+    this.p=event
+    var skip=(event-1)*this.pagelimit
+    this.getUserPagination(this.pagelimit,skip)
   }
 
 }

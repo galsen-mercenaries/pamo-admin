@@ -20,6 +20,14 @@ export class UtilisateurService {
   }
 
   banUtilisateur(user: UserModel) : Observable<any>{
-    return this.httpClient.patch(environment.baseUrl+"users/", user)
+    return this.httpClient.patch(environment.baseUrl+"users/"+user.userId, user)
+  }
+
+  getUtilisateurPagination(limit,skip) : Observable<any>{
+    return this.httpClient.get<any>(environment.baseUrl+"users?filter[limit]="+limit+"&filter[skip]="+skip)
+  }
+
+  CountTotalUser():Observable<any>{
+    return this.httpClient.get(environment.baseUrl+"users/count")
   }
 }

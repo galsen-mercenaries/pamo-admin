@@ -5,7 +5,8 @@ import { UtilisateurComponent } from './utilisateur/utilisateur.component';
 import { NewsComponent } from './news/news.component'
 import { AddNewsComponent } from './news/add-news/add-news.component';
 import { AutresComponent } from './autres/autres.component';
-
+import { MeetingComponent } from './meeting/meeting.component';
+import { PrestataireComponent } from './prestataire/prestataire.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,20 @@ const routes: Routes = [
         component: AutresComponent,
         data: {
           title: 'Autres Services'
+        }
+      },
+      {
+        path: 'prestataire',
+        component: PrestataireComponent,
+        data: {
+          title: 'Prestataire'
+        }
+      },
+      {
+        path: 'meeting',
+        component: MeetingComponent,
+        data:{
+          title: 'Meeting'
         }
       }
     ]
