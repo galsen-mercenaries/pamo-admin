@@ -17,6 +17,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ItemsFormulaireComponent } from './autres/components/items-formulaire/items-formulaire.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {MatSelectModule} from '@angular/material/select';
 import { MeetingComponent } from './meeting/meeting.component';
 import { EditMeetingComponent } from './meeting/components/edit-meeting/edit-meeting.component';
 import { DeleteMeetingComponent } from './meeting/components/delete-meeting/delete-meeting.component';
@@ -34,6 +35,7 @@ import { EditPrestataireComponent } from './prestataire/components/edit-prestata
     MatCardModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSelectModule,
     NgxPaginationModule
   ],
   entryComponents: [EditUserComponent, DeleteItemComponent, ItemsFormulaireComponent],

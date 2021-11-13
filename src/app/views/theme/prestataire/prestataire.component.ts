@@ -12,6 +12,7 @@ export class PrestataireComponent implements OnInit {
   style = 'mapbox://styles/mapbox/streets-v11';
   lat = 14.751523;
   lng = -17.45677;
+  occurencesList = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
   
   constructor() { }
 

@@ -15,7 +15,7 @@ export class PrestataireService {
   }
 
   addPrestataire(data) : Observable<any>{
-    return this.httpClient.post<any>(environment.baseUrl,data)
+    return this.httpClient.post<any>(environment.baseUrl+"prestataires",data)
   }
 
   deletePrestataire(prestataire_id) : Observable<any>{

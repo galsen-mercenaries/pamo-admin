@@ -7,6 +7,8 @@ import { AddNewsComponent } from './news/add-news/add-news.component';
 import { AutresComponent } from './autres/autres.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { PrestataireComponent } from './prestataire/prestataire.component';
+import { AddPrestataireComponent } from './prestataire/components/add-prestataire/add-prestataire.component';
+
 
 const routes: Routes = [
   {
@@ -52,6 +54,13 @@ const routes: Routes = [
         component: PrestataireComponent,
         data: {
           title: 'Prestataire'
+        }
+      },
+      {
+        path: 'prestataire/add',
+        component: AddPrestataireComponent,
+        data: {
+          title: 'Ajout Prestataire'
         }
       },
       {

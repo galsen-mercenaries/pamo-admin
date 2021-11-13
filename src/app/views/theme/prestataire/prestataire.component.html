@@ -1,1 +1,51 @@
-<div class="map" id="map" class="match-parent"></div>
+<div class="row">
+    <button color="primary" class="btn btn-primary" routerLink="/theme/prestataire/add">
+        <i class="fa fa-plus"></i> Nouveau Prestataire
+    </button>
+</div>
+<div class="row">
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-handshake-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-primary mb-0 pt-3">4</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">Nombre de Prestataire</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-handshake-o bg-success p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-info mb-0 pt-3">2</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">Nombre de Pharmacie</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-handshake-o bg-warning p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-warning mb-0 pt-3">1</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">Nombre d'Assurance</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-lg-3">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i class="fa fa-handshake-o bg-danger p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-danger mb-0 pt-3">1</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">Nombre Prestataire Ouvert</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+      <label for="statut_rv">Recherche par type de prestataire</label>
+      <select class="form-control" id="statut_rv">
+        <option value="CONFIRMED">Pharmacie</option>  
+        <option value="CANCELED">Assurance</option>
+    </select>
+    </div>
+</div>
