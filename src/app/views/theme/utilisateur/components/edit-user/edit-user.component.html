@@ -61,15 +61,18 @@
             <label class="col-md-3 col-form-label" for="role">Structure Sanitaire</label>
             <div class="col-md-9">
                 <select formControlName="structuresanitaireId" class="form-control" name="role" id="role">
-                    <option *ngFor="let item of structuresSanitaires$ | async" [value]="item?.structuresanitaireId"> {{ item?.nom}} </option>
+                    <option *ngFor="let item of structuresSanitaires$ | async" [value]="+item?.structuresanitaireId"> {{ item?.nom}} </option>
                 </select>
             </div>
           </div>
 
           <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
+            <button [disabled]="isLoading" type="submit" class="btn btn-sm btn-primary">
               <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
             </button>
+          </div>
+          <div *ngIf="hasError">
+            {{ errorMsg }}
           </div>
         </form>
       </div>

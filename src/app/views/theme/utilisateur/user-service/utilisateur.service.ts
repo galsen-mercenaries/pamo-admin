@@ -6,7 +6,7 @@ import {UserModel} from '../../../../models/user.model';
 
 const REGISTER_USER_ENDPOINT = 'user/signup';
 
-interface UserRegistration {
+export interface UserRegistration {
     nom: string;
     prenom: string;
     roleCode: string;
