@@ -9,4 +9,5 @@ export interface UserModel {
     image?: string;
     account_status?: boolean;
     date_creation?: string;
-  }
+    structuresanitaireId?: number;
+}

@@ -52,6 +52,54 @@
             </tr>
           </tbody>
         </table>
+
+          <!-- <table mat-table [dataSource]="users" class="mat-elevation-z8" matSort>
+
+            <ng-container matColumnDef="prenom">
+              <th mat-header-cell *matHeaderCellDef> Prénom </th>
+              <td mat-cell *matCellDef="let element"> {{element?.prenom}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nom">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+              <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef> Email </th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date_creation">
+              <th mat-header-cell *matHeaderCellDef> Weight </th>
+              <td mat-cell *matCellDef="let element"> {{element.date_creation}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="role">
+              <th mat-header-cell *matHeaderCellDef> Rôle </th>
+              <td mat-cell *matCellDef="let element"> {{element?.role}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numero">
+              <th mat-header-cell *matHeaderCellDef> Numéro </th>
+              <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="adresse">
+              <th mat-header-cell *matHeaderCellDef> Adresse </th>
+              <td mat-cell *matCellDef="let element"> {{element.adresse}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="account_status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.account_status == false" class="badge badge-warning">En attente</span>
+                <span *ngIf="element.account_status == true" class="badge badge-success">Validé</span> </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="USER_TABLE_COLUMNS"></tr>
+            <tr mat-row *matRowDef="let row; columns: USER_TABLE_COLUMNS;"></tr>
+          </table> -->
       </div>
     </div>
   </div>
