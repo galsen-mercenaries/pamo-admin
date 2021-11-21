@@ -1,13 +1,19 @@
 <div class="card">
     <div class="card-header">
-        <strong>Ajout Prestataire</strong>
+        <strong>Ajout Structure Sanitaire</strong>
     </div>
     <div class="card-body">
-        <form [formGroup]="prestataireForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+        <form [formGroup]="structureSanitaireForm" (ngSubmit)="onSubmit()" class="form-horizontal">
             <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="name-input">Nom</label>
                 <div class="col-md-9">
                     <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="name-input">Ville</label>
+                <div class="col-md-9">
+                    <input type="text" id="ville" formControlName="ville" class="form-control" placeholder="Ville" required />
                 </div>
             </div>
             <div class="form-group row">
@@ -16,8 +22,10 @@
                     <select id="select1" name="select1" formControlName="typePrestataire"
                         class="form-control form-control-sm">
                         <option value="0">Choix</option>
-                        <option value="Pharmacie">Assurance</option>
-                        <option value="Assurance">Mutuelle de santé</option>
+                        <option value="Pharmacie">Pharmacie</option>
+                        <option value="Hôpital">Hôpital</option>
+                        <option value="Dispensaire">Dispensaire</option>
+                        <option value="Poste de santé">Poste de santé</option>
                     </select>
                 </div>
             </div>
@@ -46,8 +54,8 @@
                 <div class="col-md-9">
                     <select id="select3" name="select3" formControlName="is_actif" class="form-control form-control-sm">
                         <option value="0">Choix</option>
-                        <option [ngValue]="true">Ouvert</option>
-                        <option [ngValue]="false">Fermé</option>
+                        <option value="Ouvert">Ouvert</option>
+                        <option value="Fermé">Fermé</option>
                     </select>
                 </div>
             </div>
@@ -57,8 +65,8 @@
                     <select id="select4" name="select4" formControlName="is_all_night"
                         class="form-control form-control-sm">
                         <option value="0">Choix</option>
-                        <option [ngValue]="true">Oui</option>
-                        <option [ngValue]="false">Non</option>
+                        <option value="Oui">Oui</option>
+                        <option value="false">Non</option>
                     </select>
                 </div>
             </div>

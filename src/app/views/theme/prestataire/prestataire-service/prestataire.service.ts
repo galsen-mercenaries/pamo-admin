@@ -18,8 +18,8 @@ export class PrestataireService {
     return this.httpClient.post<any>(environment.baseUrl+"prestataires",data)
   }
 
-  deletePrestataire(prestataire_id) : Observable<any>{
-    return this.httpClient.delete<any>(environment.baseUrl+"prestataires/"+prestataire_id)
+  deletePrestataire(prestataireId) : Observable<any>{
+    return this.httpClient.delete<any>(environment.baseUrl+"prestataires/"+prestataireId)
   }
 
   

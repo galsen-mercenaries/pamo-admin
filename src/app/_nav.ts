@@ -30,11 +30,6 @@ export const navItems: INavData[] = [
     icon: 'fa fa-server fa-lg mt-4'
   },
   {
-    name: 'Les Structure Sanitaires',
-    url: '/theme/autres',
-    icon: 'fa fa-server fa-lg mt-4'
-  },
-  {
     name: 'Meeting',
     url: '/theme/meeting',
     icon: 'fa fa-server fa-lg mt-4'
@@ -47,6 +42,11 @@ export const navItems: INavData[] = [
   {
     name: 'Prestataires',
     url: '/theme/prestataire',
+    icon: 'fa fa-server fa-lg mt-4'
+  },
+  {
+    name: 'Structures Sanitaires',
+    url: '/theme/structure-sanitaire',
     icon: 'fa fa-server fa-lg mt-4'
   },
   {

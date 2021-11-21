@@ -8,6 +8,8 @@ import { AutresComponent } from './autres/autres.component';
 import { MeetingComponent } from './meeting/meeting.component';
 import { PrestataireComponent } from './prestataire/prestataire.component';
 import { AddPrestataireComponent } from './prestataire/components/add-prestataire/add-prestataire.component';
+import { StructureSanitaireComponent } from './structure-sanitaire/structure-sanitaire.component';
+import { AddStructureSanitaireComponent } from './structure-sanitaire/components/add-structure-sanitaire/add-structure-sanitaire.component';
 
 
 const routes: Routes = [
@@ -68,6 +70,20 @@ const routes: Routes = [
         component: MeetingComponent,
         data:{
           title: 'Meeting'
+        }
+      },
+      {
+        path: 'structure-sanitaire', 
+        component: StructureSanitaireComponent,
+        data:{
+          title: 'Structure Sanitaire'
+        }
+      },
+      {
+        path: 'structure-sanitaire/add',
+        component: AddStructureSanitaireComponent,
+        data:{
+          title: 'Ajout Structure'
         }
       }
     ]

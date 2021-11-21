@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-6 col-lg-3" *ngFor="let struct of structures">
+        <div class="card">
+            <div class="card-body p-0 clearfix"><i
+                    class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+                <div class="h5 text-primary mb-0 pt-3">{{struct.count}}</div>
+                <div class="text-muted text-uppercase font-weight-bold font-xs">{{struct.type}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="form-group col-sm-4">
+      <label for="statut_rv">Status Rendez-vous</label>
+      <select class="form-control" [(ngModel)]="meetingStatus" id="statut_rv" (change)="selectMeetingStatus()">
+        <option value="CONFIRMED">Rendez-vous confirmés</option>  
+        <option value="CANCELED">Rendez-vous annulés</option>
+        <option value="PENDING">Rendez-vous en attente validation</option></select>
+    </div>
+</div>
+
+<div class="row">
+    <button color="primary" class="btn btn-primary" routerLink="/theme/structure-sanitaire/add">
+        <i class="fa fa-plus"></i> Nouvelle Structure Sanitaire
+    </button>
+</div>
+
+<br/>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Structures sanitaires
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Ville</th>
+              <th>Adresse</th>
+              <th>Date Création</th>
+              <th>Type structure</th>
+              <th>Etat</th>
+              <th>Ouvert Nuit</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let structure of structureSanitaires | paginate: {itemsPerPage: pagelimit, currentPage: p, totalItems: totalStructures }">
+              <td>{{ structure?.nom }}</td>
+              <td>{{ structure?.ville }}</td>
+              <td>{{ structure?.adresse }}</td>
+              <td>{{ structure?.date_creation | date: 'dd-MMMM-yyyy à HH:mm' }}</td>
+              <td>{{ structure?.typePrestataire}}</td>
+              <td>{{ structure?.is_actif }}</td>
+              <td>{{ structure?.is_all_night }}</td>
+              <td>
+                  <!--
+                <span *ngIf="user.account_status == false" class="badge badge-warning">En attente</span>
+                <span *ngIf="user.account_status == true" class="badge badge-success">Validé</span>
+                    -->
+            </td>
+              <td>
+                  
+                <button (click)="openDialogUser(user, 'see')" type="button" class="btn btn-square btn-primary">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button (click)="openDialogUser(user, 'edit')" type="button" class="btn btn-square btn-success">
+                  <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <button (click)="deactiveUser(user)" class="btn btn-square btn-danger">
+                  <i class="fa fa-ban"></i>
+                </button>
+                
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+</div>

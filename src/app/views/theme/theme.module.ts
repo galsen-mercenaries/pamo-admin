@@ -25,6 +25,9 @@ import { PrestataireComponent } from './prestataire/prestataire.component';
 import { AddPrestataireComponent } from './prestataire/components/add-prestataire/add-prestataire.component';
 import { DeletePrestataireComponent } from './prestataire/components/delete-prestataire/delete-prestataire.component';
 import { EditPrestataireComponent } from './prestataire/components/edit-prestataire/edit-prestataire.component';
+import { StructureSanitaireComponent } from './structure-sanitaire/structure-sanitaire.component';
+import { AddStructureSanitaireComponent } from './structure-sanitaire/components/add-structure-sanitaire/add-structure-sanitaire.component';
+import { EditStructureSanitaireComponent } from './structure-sanitaire/components/edit-structure-sanitaire/edit-structure-sanitaire.component';
 @NgModule({
   imports: [ 
     CommonModule,
@@ -53,7 +56,10 @@ import { EditPrestataireComponent } from './prestataire/components/edit-prestata
     PrestataireComponent,
     AddPrestataireComponent,
     DeletePrestataireComponent,
-    EditPrestataireComponent
+    EditPrestataireComponent,
+    StructureSanitaireComponent,
+    AddStructureSanitaireComponent,
+    EditStructureSanitaireComponent
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
 })
