@@ -25,6 +25,7 @@ import {AddPrestataireComponent} from './prestataire/components/add-prestataire/
 import {DeletePrestataireComponent} from './prestataire/components/delete-prestataire/delete-prestataire.component';
 import {EditPrestataireComponent} from './prestataire/components/edit-prestataire/edit-prestataire.component';
 import {MatSortModule} from '@angular/material/sort';
+import {SharedModule} from '../shared/shared.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -36,7 +37,8 @@ import {MatSortModule} from '@angular/material/sort';
         MatTableModule,
         MatPaginatorModule,
         MatSortModule,
-        NgxPaginationModule
+        NgxPaginationModule,
+        SharedModule
     ],
     entryComponents: [EditUserComponent, DeleteItemComponent, ItemsFormulaireComponent],
     declarations: [

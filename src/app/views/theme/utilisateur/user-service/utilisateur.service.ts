@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {UserModel} from '../../../../models/user.model';
 
-const REGISTER_USER_ENDPOINT = 'user/signup';
+const USER_ENDPOINT = 'user';
+const REGISTER_USER_ENDPOINT = `${USER_ENDPOINT}/signup`;
 
 export interface UserRegistration {
     nom: string;
@@ -33,6 +34,10 @@ export class UtilisateurService {
 
     registernNewUser(utilisateur: UserRegistration): Observable<any> {
         return this.httpClient.post(environment.baseUrl + REGISTER_USER_ENDPOINT, utilisateur);
+    }
+
+    updateUser(utilisateur: UserRegistration): Observable<any> {
+        return this.httpClient.patch(environment.baseUrl + USER_ENDPOINT, utilisateur);
     }
 
     banUtilisateur(user: UserModel): Observable<any> {
