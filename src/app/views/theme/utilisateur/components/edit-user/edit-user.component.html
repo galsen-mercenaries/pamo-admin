@@ -4,6 +4,16 @@
       </div>
       <div class="card-body">
         <form [formGroup]="userForm" (ngSubmit)="onUpdate()" class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="role">Rôle</label>
+            <div class="col-md-9">
+                <select formControlName="roleCode" class="form-control" name="role" id="role">
+                    <option value="ROLE_USER">Role User</option>
+                    <option value="ROLE_MEDECIN">Role Medecin</option>
+                    <option value="ROLE_ADMIN">Role Administrateur</option>
+                </select>
+            </div>
+          </div>
           <div *ngIf="this.data?.user?.userId" class="form-group row">
             <label class="col-md-3 col-form-label" for="userId">ID</label>
             <div class="col-md-9">
@@ -46,20 +56,23 @@
                 required />
             </div>
           </div>
-          <div class="form-group row">
-            <label class="col-md-3 col-form-label" for="role">Rôle</label>
+
+          <div class="form-group row" *ngIf="userForm?.value?.roleCode === 'ROLE_MEDECIN'">
+            <label class="col-md-3 col-form-label" for="role">Structure Sanitaire</label>
             <div class="col-md-9">
-                <select formControlName="role" class="form-control" name="role" id="role">
-                    <option value="ROLE_USER">Role User</option>
-                    <option value="ROLE_MEDECIN">Role Medecin</option>
-                    <option value="ROLE_ADMIN">Role Administrateur</option>
+                <select formControlName="structuresanitaireId" class="form-control" name="role" id="role">
+                    <option *ngFor="let item of structuresSanitaires$ | async" [value]="+item?.structuresanitaireId"> {{ item?.nom}} </option>
                 </select>
             </div>
           </div>
+
           <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
-            <button type="submit" class="btn btn-sm btn-primary">
+            <button [disabled]="isLoading" type="submit" class="btn btn-sm btn-primary">
               <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
             </button>
+          </div>
+          <div *ngIf="hasError">
+            {{ errorMsg }}
           </div>
         </form>
       </div>
