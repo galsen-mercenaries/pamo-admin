@@ -6,13 +6,14 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   imports: [
     FormsModule,
     DashboardRoutingModule,
     ChartsModule,
     BsDropdownModule,
+    MatProgressBarModule,
     ButtonsModule.forRoot()
   ],
   declarations: [ DashboardComponent ]

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { tap } from 'rxjs/operators';
 import { SharedService } from '../../../shared/shared.service';
 import { NewsService } from '../news.service';
 
@@ -10,6 +11,7 @@ import { NewsService } from '../news.service';
   styleUrls: ['./add-news.component.scss']
 })
 export class AddNewsComponent implements OnInit {
+  id
   newForm = this.formBuilder.group({
     titre : "",
     categorie: "",
@@ -19,13 +21,22 @@ export class AddNewsComponent implements OnInit {
   });
   private selectedFile : any
   private base64textString: String = "";
+  mode: string;
+  selectedNew: any;
 
   constructor(private formBuilder : FormBuilder,
     private router : Router, 
     private newsService : NewsService,
-    private sharedService : SharedService) { }
+    private sharedService : SharedService,
+    private activatedRoute : ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
+    this.id = this.activatedRoute.snapshot.params["id"];
+    if(this.id){
+      this.mode = "update";
+      this.getNewsById(this.id)
+    }
   }
   
   handleFileInput(evt) {
@@ -47,32 +58,76 @@ export class AddNewsComponent implements OnInit {
   }
   onSubmit(){
     var data = this.newForm.value;
-    console.log(this.selectedFile)
     const formData = new FormData()
     formData.append('file',this.selectedFile)
     console.log(formData)
-    /*var data ={};
-    data['titre'] = this.newForm.value['titre']
-    data['contenu'] = this.newForm.value['contenu']*/
-    this.newsService.UploadImage(formData).subscribe(
+    if(this.selectedFile){
+      console.log("test")
+      this.newsService.UploadImage(formData).subscribe(
+        (res) =>{ 
+          console.log(res["Location"])
+          data["imageUrl"] = res["Location"]
+          if(this.mode=="update"){
+            this.newsService.updateNew(this.id,data).subscribe(
+              (res) =>{
+                console.log(res)
+                this.router.navigate(['/theme/news'])
+              },
+              (err)=>{
+                console.log(err)
+              }
+            );
+          }
+          else{
+            this.newsService.addNews(data).subscribe(
+              (res) =>{
+                console.log(res)
+                this.router.navigate(['/theme/news'])
+              },
+              (err)=>{
+                console.log(err)
+              }
+            );
+          }
+
+        },
+        (err) =>{
+          console.log(err)
+        })
+    }
+    else{
+      data["imageUrl"] = this.selectedNew.imageUrl
+      this.newsService.updateNew(this.id,data).subscribe(
+        (res) =>{
+          console.log(res)
+          this.router.navigate(['/theme/news'])
+        },
+        (err)=>{
+          console.log(err)
+        }
+      );
+    }
+    
+  }
+
+  getNewsById(id){
+    this.newsService.getNewById(id).subscribe(
       (res) => {
         console.log(res)
-        data['imageUrl'] = res['Location']
-        console.log(data)
-        this.newsService.addNews(data).subscribe(
-          (res) =>{
-            console.log(res)
-            this.router.navigate(['/theme/news'])
+        this.selectedNew = res
+        this.newForm.patchValue(
+          {
+            titre : res.titre,
+            categorie : res.categorie,
+            contenu : res.contenu,
+            isActif : res.isActif
           }
-        )
+          );
       },
-      (err) =>{
+      (err) => {
         console.log(err)
       }
     )
-    //data["image_url"] = "data:image/png;base64," + this.base64textString;
-    //console.log(data)
-    
   }
 
 

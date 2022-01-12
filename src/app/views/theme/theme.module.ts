@@ -1,8 +1,6 @@
 // Angular
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-
-// Theme Routing
 import { ThemeRoutingModule } from './theme-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewsComponent } from './news/add-news/add-news.component';
@@ -28,6 +26,13 @@ import { EditPrestataireComponent } from './prestataire/components/edit-prestata
 import { StructureSanitaireComponent } from './structure-sanitaire/structure-sanitaire.component';
 import { AddStructureSanitaireComponent } from './structure-sanitaire/components/add-structure-sanitaire/add-structure-sanitaire.component';
 import { EditStructureSanitaireComponent } from './structure-sanitaire/components/edit-structure-sanitaire/edit-structure-sanitaire.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import {MatIconModule} from '@angular/material/icon';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { AddPrestataireStructureComponent } from './prestataire/components/add-prestataire-structure/add-prestataire-structure.component';
+import { PrestatraireStructureComponent } from './prestataire/components/prestatraire-structure/prestatraire-structure.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
   imports: [ 
     CommonModule,
@@ -39,7 +44,12 @@ import { EditStructureSanitaireComponent } from './structure-sanitaire/component
     MatTableModule,
     MatPaginatorModule,
     MatSelectModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatIconModule,
+    MatProgressBarModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   entryComponents: [EditUserComponent, DeleteItemComponent, ItemsFormulaireComponent],
   declarations: [
@@ -59,7 +69,9 @@ import { EditStructureSanitaireComponent } from './structure-sanitaire/component
     EditPrestataireComponent,
     StructureSanitaireComponent,
     AddStructureSanitaireComponent,
-    EditStructureSanitaireComponent
+    EditStructureSanitaireComponent,
+    AddPrestataireStructureComponent,
+    PrestatraireStructureComponent
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
 })

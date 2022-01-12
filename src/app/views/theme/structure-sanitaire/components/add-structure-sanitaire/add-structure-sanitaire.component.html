@@ -43,19 +43,31 @@
                         required />
                 </div>
             </div>
-            <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="position-input">Adresse MAP</label>
+            <div (click)="showMap()" class="form-group row">
+                <label class="col-md-3 col-form-label" for="latitude">Latitude</label>
                 <div class="col-md-9">
-                    <div class="map" id="map" class="match-parent"></div>
+                    <input disabled type="text" formControlName="latitude" class="form-control"
+                        placeholder="latitude" />
                 </div>
             </div>
+            <div (click)="showMap()" class="form-group row">
+                <label class="col-md-3 col-form-label" for="longitude">Longitude</label>
+                <div class="col-md-9">
+                    <input disabled type="text" formControlName="longitude" class="form-control"
+                        placeholder="longitude" />
+                </div>
+            </div>
+            <div class="c-pointer">
+                <button class="btn btn-sm btn-primary" (click)="showMap()">Afficher la carte</button>
+            </div>
+            <br>
             <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="select3">Etat Prestataire</label>
                 <div class="col-md-9">
                     <select id="select3" name="select3" formControlName="is_actif" class="form-control form-control-sm">
-                        <option value="0">Choix</option>
-                        <option value="Ouvert">Ouvert</option>
-                        <option value="Fermé">Fermé</option>
+                        <option [ngValue]="0">Choix</option>
+                        <option [ngValue]="true">Ouvert</option>
+                        <option [ngValue]="false">Fermé</option>
                     </select>
                 </div>
             </div>
@@ -64,9 +76,9 @@
                 <div class="col-md-9">
                     <select id="select4" name="select4" formControlName="is_all_night"
                         class="form-control form-control-sm">
-                        <option value="0">Choix</option>
-                        <option value="Oui">Oui</option>
-                        <option value="false">Non</option>
+                        <option [ngValue]="0">Choix</option>
+                        <option [ngValue]="true">Oui</option>
+                        <option [ngValue]="false">Non</option>
                     </select>
                 </div>
             </div>

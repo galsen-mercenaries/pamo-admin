@@ -1,1 +1,15 @@
-<p>delete-meeting works!</p>
+<div class="modal-body text-center">
+    <p *ngIf="data.type=='CANCELED'">Voulez-vous annuler le rendez-vous du patient {{ data.meeting?.prenomPatient }} {{ data.meeting?.nomPatient }}
+    </p>
+    <p *ngIf="data.type=='CONFIRMED'">Voulez-vous confirmer le rendez-vous du patient {{ data.meeting?.prenomPatient }} {{ data.meeting?.nomPatient }}
+    </p>
+    <button type="button" class="btn btn-danger" (click)="confirmBanir()">
+        OUI
+    </button>
+    <button type="button" class="btn btn-default" (click)="decline()">
+        NON
+    </button>
+</div>
+<div>
+    {{ errorMsg }}
+</div>

@@ -52,22 +52,5 @@ export const navItems: INavData[] = [
   {
     title: true,
     name: 'Components'
-  },
-  {
-    name: 'Base',
-    url: '/base',
-    icon: 'icon-puzzle',
-    children: [
-      {
-        name: 'Cards',
-        url: '/base/cards',
-        icon: 'icon-puzzle'
-      },
-      {
-        name: 'Carousels',
-        url: '/base/carousels',
-        icon: 'icon-puzzle'
-      }
-    ]
   }
 ];

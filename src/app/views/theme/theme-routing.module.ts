@@ -10,7 +10,9 @@ import { PrestataireComponent } from './prestataire/prestataire.component';
 import { AddPrestataireComponent } from './prestataire/components/add-prestataire/add-prestataire.component';
 import { StructureSanitaireComponent } from './structure-sanitaire/structure-sanitaire.component';
 import { AddStructureSanitaireComponent } from './structure-sanitaire/components/add-structure-sanitaire/add-structure-sanitaire.component';
-
+import { EditPrestataireComponent } from './prestataire/components/edit-prestataire/edit-prestataire.component';
+import { AddPrestataireStructureComponent } from './prestataire/components/add-prestataire-structure/add-prestataire-structure.component';
+import {PrestatraireStructureComponent} from './prestataire/components/prestatraire-structure/prestatraire-structure.component'
 
 const routes: Routes = [
   {
@@ -45,6 +47,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'news/edit/:id',
+        component: AddNewsComponent,
+        data: {
+          title: 'Modification Infos'
+        }
+      },
+      {
         path: 'autres',
         component: AutresComponent,
         data: {
@@ -66,6 +75,13 @@ const routes: Routes = [
         }
       },
       {
+        path: 'prestataire/edit/:id',
+        component: AddPrestataireComponent,
+        data: {
+          title: 'Modification Prestataire'
+        }
+      },
+      {
         path: 'meeting',
         component: MeetingComponent,
         data:{
@@ -84,6 +100,27 @@ const routes: Routes = [
         component: AddStructureSanitaireComponent,
         data:{
           title: 'Ajout Structure'
+        }
+      },
+      {
+        path: 'structure-sanitaire/edit/:id',
+        component: AddStructureSanitaireComponent,
+        data:{
+          title: 'Modifier Structure'
+        }
+      },
+      {
+        path: 'prestataire/add-structure',
+        component: AddPrestataireStructureComponent,
+        data: {
+          title: 'Ajout Prestataire-Structure'
+        }
+      },
+      {
+        path: 'prestataire/structure-sanitaire/:id',
+        component: PrestatraireStructureComponent,
+        data: {
+          title: 'Liste des structures sanitaires'
         }
       }
     ]

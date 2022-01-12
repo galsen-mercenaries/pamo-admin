@@ -1,0 +1,79 @@
+<div class="row">
+    <h2>Statistiques de la plateforme</h2>
+</div>
+<div class="card-group mb-4">
+    <div class="card">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="cil-user"></i>
+          </div>
+          <div class="h4 mb-0">{{statsData?.users}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">Utilisateurs</small>
+          <div class="progress progress-xs mt-3 mb-0">
+            <mat-progress-bar  mode="determinate" value="{{statsData?.users}}"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="cil-newspaper"></i>
+          </div>
+          <div class="h4 mb-0">{{statsData?.news}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">News</small>
+          <div class="progress progress-xs mt-3 mb-0">
+            <mat-progress-bar  mode="determinate" value="{{statsData?.news}}"></mat-progress-bar>
+          </div> 
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="cil-room"></i>
+          </div>
+          <div class="h4 mb-0">{{statsData?.prestataires}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">Prestataires</small>
+          <div class="progress progress-xs mt-3 mb-0">
+             <mat-progress-bar  mode="determinate" value="{{statsData?.prestataires}}"></mat-progress-bar>
+        </div>
+        </div>
+      </div>
+</div>
+<div class="card-group mb-4">
+    <div class="card">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="cil-school"></i>
+          </div>
+          <div class="h4 mb-0">{{statsData?.specialisations}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">Spécialisations</small>
+          <div class="progress progress-xs mt-3 mb-0">
+            <mat-progress-bar  mode="determinate" value="{{statsData?.specialisations}}"></mat-progress-bar>
+            </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="cil-hospital"></i>
+          </div>
+          <div class="h4 mb-0">{{statsData?.structureSanitaires}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">Structures Sanitaires</small>
+          <div class="progress progress-xs mt-3 mb-0">
+            <mat-progress-bar  mode="determinate" value="{{statsData?.structureSanitaires}}"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="h1 text-muted text-right mb-4">
+            <i class="icon-people"></i>
+          </div>
+          <div class="h4 mb-0">{{statsData?.meetings}}</div>
+          <small class="text-muted text-uppercase font-weight-bold">Meeting</small>
+          <div class="progress progress-xs mt-3 mb-0">
+            <mat-progress-bar  mode="determinate" value="{{statsData?.meetings}}"></mat-progress-bar>
+          </div>
+        </div>
+      </div>
+</div>
