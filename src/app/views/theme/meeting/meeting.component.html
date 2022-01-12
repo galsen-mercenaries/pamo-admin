@@ -37,19 +37,23 @@
 </div>
 <div class="row">
     <div class="form-group col-sm-4">
-      <label for="statut_rv">Status Rendez-vous</label>
-      <select class="form-control" [(ngModel)]="meetingStatus" id="statut_rv" (change)="selectMeetingStatus()">
-        <option value="CONFIRMED">Rendez-vous confirmés</option>  
-        <option value="CANCELED">Rendez-vous annulés</option>
-        <option value="PENDING">Rendez-vous en attente validation</option></select>
+        <label for="statut_rv">Status Rendez-vous</label>
+        <select class="form-control" [(ngModel)]="meetingStatus" id="statut_rv" (change)="selectMeetingStatus()">
+            <option value="CONFIRMED">Rendez-vous confirmés</option>
+            <option value="CANCELED">Rendez-vous annulés</option>
+            <option value="PENDING">Rendez-vous en attente validation</option>
+        </select>
     </div>
 </div>
 <div class="row">
     <div class="col-sm-6 col-md-4"
         *ngFor="let meeting of Meetings | paginate: {itemsPerPage: pagelimit, currentPage: p, totalItems: totalMeetings}">
         <div class="card">
-            <div class="card-header"> {{meeting.datePatient}}<div class="card-header-actions"><span
-                        class="badge badge-success">{{meeting.status}}</span></div>
+            <div class="card-header"> {{meeting.dateMedecin | date: 'dd-MM-yyyy à HH:mm' }}<div class="card-header-actions">
+                    <span *ngIf="meeting.status == 'CANCELED'" class="badge badge-danger">Annulé</span>
+                    <span *ngIf="meeting.status == 'CONFIRMED'" class="badge badge-success">Confirmé</span>
+                    <span *ngIf="meeting.status == 'PENDING'" class="badge badge-warning">En Attente</span>
+                </div>
             </div>
             <div class="card-body">
                 <div *ngIf="meeting.medecin">
@@ -62,13 +66,19 @@
                 <div>
                     <ul>
                         <li>Patient : {{meeting.prenomPatient}} {{meeting.nomPatient}} </li>
-                        <li>Numéro téléphone : 774774983</li>
+                        <li>Numéro téléphone : {{meeting.numeroPatient}}</li>
+                        <li>Date Patient :  {{meeting.datePatient | date: 'dd-MM-yyyy à HH:mm'}}</li>
                     </ul>
                     <hr class="dl-divider" aria-hidden="true">
                 </div>
             </div>
             <div class="card-footer text-muted">
-                Modifier/Annuler
+                <button (click)="actionMeeting(meeting,'edit')" type="button" class="btn btn-square btn-success">
+                    <i class="fa fa-pencil-square-o">Accepter RV</i>
+                </button>
+                <button (click)="actionMeeting(meeting,'cancel')" class="btn btn-square btn-danger">
+                    <i class="fa fa-ban">Annuler RV</i>
+                </button>
             </div>
         </div>
     </div>

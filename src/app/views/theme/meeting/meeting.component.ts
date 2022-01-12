@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { DeleteMeetingComponent } from './components/delete-meeting/delete-meeting.component';
 import {MeetingService} from './meeting-service/meeting.service'
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EditMeetingComponent } from './components/edit-meeting/edit-meeting.component';
+
+
 @Component({
   selector: 'app-meeting',
   templateUrl: './meeting.component.html',
@@ -17,7 +22,10 @@ export class MeetingComponent implements OnInit {
   totalMeetings: number = 0
   meetingStatus : string
 
-  constructor(private meetingService : MeetingService) { }
+  constructor(
+    private meetingService : MeetingService,
+    private matDialog: MatDialog
+    ) { }
 
   ngOnInit(): void {
     this.countMeetingByStatus()
@@ -101,5 +109,38 @@ export class MeetingComponent implements OnInit {
     else{
       this.totalMeetings = this.pendingMeeting
     }
+  }
+
+  cancelMeeting(meeting, type){
+    const  matDialogRef = this.matDialog.open(DeleteMeetingComponent,{
+      data: {meeting},
+      width : '450px'
+    });
+
+    matDialogRef.afterClosed().subscribe((res: {success:boolean}) =>{
+      if (res && res.success){
+        this.getMeetingPagination(this.pagelimit,0)
+      }
+    })
+    //console.log(meeting)
+  }
+
+  actionMeeting(meeting,type){
+    //TypeModel = type == "edit" ? EditMeetingComponent : DeleteMeetingComponent
+    //meeting["status"] = type == "edit" ? "CONFIRMED" : "CANCELED"
+    meeting.dateMedecin =  meeting.dateMedecin ? meeting.dateMedecin : meeting.datePatient
+    meeting.datePatient =  meeting.datePatient ? meeting.datePatient : meeting.dateMedecin 
+    console.log(meeting)
+    
+    const  matDialogRef = this.matDialog.open(DeleteMeetingComponent,{
+      data: {meeting,type},
+      width : '450px'
+    });
+
+    matDialogRef.afterClosed().subscribe((res: {success:boolean}) =>{
+      if (res && res.success){
+        this.getMeetingPagination(this.pagelimit,0)
+      }
+    })
   }
 }

@@ -23,6 +23,7 @@ export class DeleteItemComponent implements OnInit {
     this.userServ.banUtilisateur(this.data.user).subscribe(
       (res) => {
         this.matDialog.close();
+        console.log(res)
       },
       (err) => {
         console.log(err);

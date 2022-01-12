@@ -1,1 +1,13 @@
-<p>delete-prestataire works!</p>
+<div class="modal-body text-center">
+    <p>Voulez-vous supprimer le prestataire de santé suivant {{ data.prestataire?.nom }}
+    </p>
+    <button type="button" class="btn btn-danger" (click)="confirmBanir()">
+        OUI
+    </button>
+    <button type="button" class="btn btn-default" (click)="decline()">
+        NON
+    </button>
+</div>
+<div>
+    {{ errorMsg }}
+</div>

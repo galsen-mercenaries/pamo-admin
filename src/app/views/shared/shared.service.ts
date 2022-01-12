@@ -54,4 +54,11 @@ export class SharedService {
     return (file.size > environment.fileMaxSize ? true : false)
   }
   
+  generateString(baseString: string) {
+    baseString = baseString.replace(/[^a-zA-Z0-9]/g,"");
+    const charactersLength = baseString.length;
+    const result = baseString + charactersLength;
+    
+    return result
+  }
 }

@@ -57,4 +57,17 @@ export class MeetingService {
   CountTotalMeeting(filter?): Observable<any> {
     return this.httpClient.get(environment.baseUrl + "meetings/count");
   }
+
+  actionMeeting(meeting, type): Observable<any>{
+    meeting["status"] = type=="edit" ? "CONFIRMED":"CANCELED"
+    meeting["datePatient"]= type=="edit" ? meeting["dateMedecin"] : meeting["datePatient"]
+    meeting["numeroPatient"] = "test"
+    delete meeting["medecin"]
+    return this.httpClient.put(environment.baseUrl+"meetings/"+meeting.meetingId,meeting)
+  }
+
+  editMeeting(meeting): Observable<any>{
+    return this.httpClient.put(environment.baseUrl+"meetings/"+meeting.meetindId, meeting)
+  }
+
 }

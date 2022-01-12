@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class NewsService {
 
+
   constructor(private httpClient : HttpClient) { }
 
   getNews() : Observable<any>{
@@ -31,4 +32,15 @@ export class NewsService {
     var url = environment.baseUrl+"news/count?[where][isActif]="+status
     return this.httpClient.get<any>(url)
   }
+
+  getNewById(id): Observable<any>{
+    var url = environment.baseUrl+"news/"+id
+    return this.httpClient.get<any>(url)
+  }
+
+  updateNew(id,data) : Observable<any>{
+    var url = environment.baseUrl+"news/"+id
+    return this.httpClient.put<any>(url,data)
+  }
+  
 }

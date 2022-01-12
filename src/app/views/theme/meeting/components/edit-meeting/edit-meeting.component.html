@@ -1,0 +1,42 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Ajout Prestataire</strong>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="meetingForm" (ngSubmit)="editMeeting()" class="form-horizontal">
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="name-input">Nom</label>
+                <div class="col-md-9">
+                    <input type="text" id="nom" formControlName="nom" class="form-control" placeholder="Nom" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="libelle-input">Libellé</label>
+                <div class="col-md-9">
+                    <input type="text" id="libelle" formControlName="libelle" class="form-control" placeholder="Libellé"
+                        required />
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+
+<div class="modal-body text-center">
+    <p>Voulez-vous supprimer le prestataire de santé suivant {{ data.prestataire?.nom }}
+    </p>
+    <button type="button" class="btn btn-danger" (click)="editMeeting()">
+        OUI
+    </button>
+    <button type="button" class="btn btn-default" (click)="decline()">
+        NON
+    </button>
+</div>
+<div>
+    {{ errorMsg }}
+</div>

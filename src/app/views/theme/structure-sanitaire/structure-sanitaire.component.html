@@ -1,0 +1,123 @@
+<div class="row" *ngIf="structuresCount">
+  <div class="col-6 col-lg-3">
+    <div class="card">
+      <div class="card-body p-0 clearfix"><i class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-primary mb-0 pt-3">{{structuresCount[0]?.count + structuresCount[1]?.count + structuresCount[2]?.count + structuresCount[3]?.count}}</div>
+        <div class="text-muted text-uppercase font-weight-bold font-xs">Structures Sanitaires</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-1">
+
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card">
+      <div class="card-body p-0 clearfix"><i class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-primary mb-0 pt-3">{{structuresCount[0]?.count}}</div>
+        <div class="text-muted text-uppercase font-weight-bold font-xs">Hôpital</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card">
+      <div class="card-body p-0 clearfix"><i class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-primary mb-0 pt-3">{{structuresCount[1]?.count}}</div>
+        <div class="text-muted text-uppercase font-weight-bold font-xs">Pharmacie</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card">
+      <div class="card-body p-0 clearfix"><i class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-primary mb-0 pt-3">{{structuresCount[2]?.count}}</div>
+        <div class="text-muted text-uppercase font-weight-bold font-xs">Dispensaire</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-6 col-lg-2">
+    <div class="card">
+      <div class="card-body p-0 clearfix"><i class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
+        <div class="h5 text-primary mb-0 pt-3">{{structuresCount[3]?.count}}</div>
+        <div class="text-muted text-uppercase font-weight-bold font-xs">Poste de santé</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="form-group col-sm-4">
+    <label for="statut_rv">Type de Structure Sanitaire</label>
+    <select class="form-control" [(ngModel)]="typePrestataire" id="statut_rv" (change)="selectStructureType()">
+      <option value="structures">Toutes les structures sanitaires</option>
+      <option value="Hôpital">Hôpital</option>
+      <option value="Pharmacie">Pharmacie</option>
+      <option value="Dispensaire">Dispensaire</option>
+      <option value="Poste de Santé">Poste de Santé</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <button color="primary" class="btn btn-primary" routerLink="/theme/structure-sanitaire/add">
+    <i class="fa fa-plus"></i> Nouvelle Structure Sanitaire
+  </button>
+</div>
+
+<br />
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Structures sanitaires
+      </div>
+      <div class="card-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Ville</th>
+              <th>Adresse</th>
+              <th>Date Création</th>
+              <th>Type structure</th>
+              <th>Etat</th>
+              <th>Ouvert Nuit</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let structure of structureSanitaires | paginate: {itemsPerPage: pagelimit, currentPage: p, totalItems: totalStructures }">
+              <td>{{ structure?.nom }}</td>
+              <td>{{ structure?.ville }}</td>
+              <td>{{ structure?.adresse }}</td>
+              <td>{{ structure?.date_creation | date: 'dd-MMMM-yyyy à HH:mm' }}</td>
+              <td>{{ structure?.typePrestataire}}</td>
+              <td>
+                <span *ngIf="structure?.is_actif == false" class="badge badge-warning">Fermé</span>
+                <span *ngIf="structure?.is_actif== true" class="badge badge-success">Ouvert</span>
+              </td>
+              <td>
+                <span *ngIf="structure?.is_all_night == false" class="badge badge-warning">Non</span>
+                <span *ngIf="structure?.is_all_night == true" class="badge badge-success">Oui</span>
+              </td>
+              <td>
+
+                <button (click)="openDialogUser(structure, 'see')" type="button" class="btn btn-square btn-primary">
+                  <i class="fa fa-eye"></i>
+                </button>
+                <button (click)="editStructureSanitaire(structure, 'edit')" type="button"
+                  class="btn btn-square btn-success">
+                  <i class="fa fa-pencil-square-o"></i>
+                </button>
+                <button (click)="deactiveUser(structure)" class="btn btn-square btn-danger">
+                  <i class="fa fa-ban"></i>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+</div>

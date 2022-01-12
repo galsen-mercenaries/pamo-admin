@@ -12,6 +12,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatButtonModule } from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -46,6 +48,11 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
 import { AuthInterceptor } from './intherceptor/auth.interceptor';
+import { MapComponent } from './views/shared/map/map.component';
+import {MatChipsModule} from '@angular/material/chips';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+
 
 @NgModule({
   imports: [
@@ -70,7 +77,12 @@ import { AuthInterceptor } from './intherceptor/auth.interceptor';
     MatButtonModule,
     MatInputModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatProgressBarModule,
+    NgMultiSelectDropDownModule.forRoot()
   ],
   declarations: [
     AppComponent,
@@ -78,6 +90,7 @@ import { AuthInterceptor } from './intherceptor/auth.interceptor';
     P404Component,
     P500Component,
     LoginComponent,
+    MapComponent,
     ],
   providers: [
     {
