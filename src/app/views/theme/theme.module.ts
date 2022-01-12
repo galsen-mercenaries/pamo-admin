@@ -1,6 +1,8 @@
 // Angular
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+
+// Theme Routing
 import { ThemeRoutingModule } from './theme-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddNewsComponent } from './news/add-news/add-news.component';
@@ -75,4 +77,4 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }]
 })
-export class ThemeModule { }
+export class ThemeModule {}

@@ -1,8 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { UserModel } from '../../../../../models/user.model';
-
+import { AutresService } from '../../../autres/autres.service';
+import { UserRegistration, UtilisateurService } from '../../user-service/utilisateur.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -10,7 +11,11 @@ import { UserModel } from '../../../../../models/user.model';
 })
 export class EditUserComponent implements OnInit {
   userForm: FormGroup;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {user: UserModel, mode?: 'edit' | 'see' | 'create'}) { }
+  structuresSanitaires$;
+  isLoading: boolean;
+  hasError: boolean;
+  errorMsg: string;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {user: UserModel, mode?: 'edit' | 'see' | 'create'}, private autresService: AutresService, private userService: UtilisateurService, private matDialogRef: MatDialogRef<EditUserComponent>) { }
 
   ngOnInit(): void {
     this.userForm = new FormGroup ({
@@ -20,13 +25,37 @@ export class EditUserComponent implements OnInit {
       email : new FormControl({value: this.data?.user?.email, disabled: this.data.mode === 'see'}, Validators.required),
       numero : new FormControl({value: this.data?.user?.numero, disabled: this.data.mode === 'see'}, Validators.required),
       adresse : new FormControl({value: this.data?.user?.adresse, disabled: this.data.mode === 'see'}, Validators.required),
-      role : new FormControl({value: this.data?.user?.role?.code ? this.data?.user?.role?.code : 'ROLE_USER', disabled: this.data.mode === 'see'}, Validators.required),
-    })
+      roleCode : new FormControl({value: this.data?.user?.role?.code ? this.data?.user?.role?.code : 'ROLE_USER', disabled: this.data.mode === 'see'}, Validators.required),
+      structuresanitaireId : new FormControl({value: +this.data?.user?.structuresanitaireId , disabled: this.data.mode === 'see'}),
+    });
+    this.getStructureSanitaire();
   }
 
   onUpdate() {
-    console.log('form', this.userForm.value);
+    this.isLoading = true;
+    this.hasError = false;
+    this.errorMsg = 'Une erreur est survenue';
+    const payload: UserRegistration = this.userForm.value;
+    payload.password = Math.random().toString(10).slice(-8);
+    if(!payload?.structuresanitaireId) delete payload.structuresanitaireId;
+    if(payload?.structuresanitaireId) payload.structuresanitaireId = +payload?.structuresanitaireId;
 
+    this.userService.registernNewUser(payload).subscribe((res: any) => {
+      this.isLoading = false;
+      this.close();
+    }, (err: any) => {
+      this.hasError = true;
+      this.isLoading = false;
+      this.errorMsg = err?.error?.error?.message;
+    })
+  }
+
+  getStructureSanitaire(){
+    this.structuresSanitaires$ = this.autresService.getStructureSanitaire();
+  }
+
+  close() {
+    this.matDialogRef.close();
   }
 
 }
