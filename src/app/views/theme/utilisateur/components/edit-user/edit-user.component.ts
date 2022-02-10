@@ -16,6 +16,7 @@ export class EditUserComponent implements OnInit {
   isLoading: boolean;
   hasError: boolean;
   errorMsg: string;
+  roles: { code: string, nom: string, roleId: number}[] = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: {user: UserModel, mode?: 'edit' | 'see' | 'create'}, private autresService: AutresService, private userService: UtilisateurService, private matDialogRef: MatDialogRef<EditUserComponent>, private alertService: AlertMsgService) { }
 
   ngOnInit(): void {
@@ -27,12 +28,19 @@ export class EditUserComponent implements OnInit {
       email : new FormControl({value: this.data?.user?.email, disabled: this.data.mode === 'see'}, Validators.required),
       numero : new FormControl({value: this.data?.user?.numero, disabled: this.data.mode === 'see'}, Validators.required),
       adresse : new FormControl({value: this.data?.user?.adresse, disabled: this.data.mode === 'see'}, Validators.required),
-      roleCode : new FormControl({value: this.data?.user?.role?.code ? this.data?.user?.role?.code : 'ROLE_USER', disabled: this.data.mode === 'see'}, Validators.required),
+      roleCode : new FormControl({value: this.data?.user?.role?.code ? this.data?.user?.role?.code : 'ROLE_USER', disabled: this.data.mode === 'see' || this.data.mode === 'edit'}, Validators.required),
       structuresanitaireId : new FormControl({value: +this.data?.user?.structuresanitaireId , disabled: this.data.mode === 'see'}),
     });
     this.getStructureSanitaire();
+    this.getRoles();
+
   }
 
+  getRoles() {
+    this.autresService.getRoles().subscribe(data => {
+        this.roles = data;
+    });
+}
   onUpdate() {
     this.isLoading = true;
     this.hasError = false;
@@ -45,8 +53,9 @@ export class EditUserComponent implements OnInit {
       payload.password = Math.random().toString(10).slice(-8);
       this.userService.registernNewUser(payload).subscribe((res: any) => {
         this.isLoading = false;
-        this.alertService.displaySuccessMsg("La création de l'utilisateur a été effectué avec succés")
-        this.close();
+        this.alertService.displaySuccessMsg("La création de l'utilisateur a été effectué avec succés");
+        const data = { payload: res };
+        this.close(data);
       }, (err: any) => {
         this.hasError = true;
         this.isLoading = false;
@@ -54,8 +63,17 @@ export class EditUserComponent implements OnInit {
       })
     }else {
       console.log('payload', payload);
-
-      // this.alertService.displaySuccessMsg('Updated user infos')
+      delete payload.roleCode;
+      this.userService.updateUser(payload).subscribe((res: any) => {
+        this.isLoading = false;
+        this.alertService.displaySuccessMsg("Les infos de l'utilisateur ont bien été mises à jour");
+        const data = { payload };
+        this.close(data);
+      }, (err: any) => {
+        this.hasError = true;
+        this.isLoading = false;
+        this.errorMsg = err?.error?.error?.message;
+      });
     }
   }
 
@@ -63,8 +81,8 @@ export class EditUserComponent implements OnInit {
     this.structuresSanitaires$ = this.autresService.getStructureSanitaire();
   }
 
-  close() {
-    this.matDialogRef.close();
+  close(data?: any) {
+    this.matDialogRef.close(data);
   }
 
 }

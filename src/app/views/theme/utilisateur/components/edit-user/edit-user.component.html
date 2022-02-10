@@ -73,9 +73,12 @@
             </div>
           </div>
 
-          <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
-            <button [disabled]="isLoading" type="submit" class="btn btn-sm btn-primary">
+          <div class="card-footer">
+            <button *ngIf="data.mode === 'edit' || data.mode === 'create'" [disabled]="isLoading" type="submit" class="btn btn-sm btn-primary">
               <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
+            </button>
+            <button type="button" (click)="close()" class="btn btn-sm btn-primary">
+              <i class="fa fa-times"></i>Fermer
             </button>
           </div>
           <div *ngIf="hasError">

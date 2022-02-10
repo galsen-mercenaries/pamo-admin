@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { UserModel } from "../../../../../models/user.model";
+import { AlertMsgService } from "../../../../shared/alert-msg/alert-msg.service";
 import { UtilisateurService } from "../../user-service/utilisateur.service";
 
 @Component({
@@ -13,7 +14,8 @@ export class DeleteItemComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { user: UserModel },
     private userServ: UtilisateurService,
-    private matDialog: MatDialogRef<DeleteItemComponent>
+    private matDialog: MatDialogRef<DeleteItemComponent>,
+    private alertService: AlertMsgService
   ) {}
 
   ngOnInit(): void {}
@@ -22,7 +24,9 @@ export class DeleteItemComponent implements OnInit {
     this.errorMsg = null;
     this.userServ.banUtilisateur(this.data.user).subscribe(
       (res) => {
-        this.matDialog.close();
+        this.alertService.displaySuccessMsg("Le compte de l'utilisateur a été desactivé");
+        const data = { payload: this.data.user };
+        this.matDialog.close(data);
       },
       (err) => {
         console.log(err);

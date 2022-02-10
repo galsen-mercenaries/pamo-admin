@@ -36,11 +36,12 @@ export class UtilisateurService {
         return this.httpClient.post(environment.baseUrl + REGISTER_USER_ENDPOINT, utilisateur);
     }
 
-    updateUser(utilisateur: UserRegistration): Observable<any> {
-        return this.httpClient.patch(environment.baseUrl + USER_ENDPOINT, utilisateur);
+    updateUser(user: UserModel): Observable<any> {
+        return this.httpClient.patch(environment.baseUrl +`users/${user.userId}`, user);
     }
 
     banUtilisateur(user: UserModel): Observable<any> {
+        user.account_status = false;
         return this.httpClient.patch(environment.baseUrl + 'users/' + user.userId, user);
     }
 
@@ -52,5 +53,9 @@ export class UtilisateurService {
 
     CountTotalUser(): Observable<any> {
         return this.httpClient.get(environment.baseUrl + 'users/count');
+    }
+
+    getMedecinInfos() {
+        this.httpClient.get(environment.baseUrl + 'medecins?filter[include][0]=user')
     }
 }

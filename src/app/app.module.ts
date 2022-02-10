@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import {LOCALE_ID, NgModule} from '@angular/core';
+import {LocationStrategy, HashLocationStrategy, registerLocaleData} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {PerfectScrollbarModule} from 'ngx-perfect-scrollbar';
@@ -39,7 +39,9 @@ import {TabsModule} from 'ngx-bootstrap/tabs';
 import {ChartsModule} from 'ng2-charts';
 import {AuthInterceptor} from './intherceptor/auth.interceptor';
 import {SharedModule} from './views/shared/shared.module';
+import localeFr from '@angular/common/locales/fr';
 
+registerLocaleData(localeFr, 'fr');
 @NgModule({
     imports: [
         BrowserModule,
@@ -77,7 +79,8 @@ import {SharedModule} from './views/shared/shared.module';
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true
-        }
+        },
+        {provide: LOCALE_ID, useValue: 'fr' }
     ],
     bootstrap: [AppComponent]
 })
