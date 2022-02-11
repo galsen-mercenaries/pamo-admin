@@ -4,7 +4,8 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../../../environments/environment';
 import {UserModel} from '../../../../models/user.model';
 
-const REGISTER_USER_ENDPOINT = 'user/signup';
+const USER_ENDPOINT = 'user';
+const REGISTER_USER_ENDPOINT = `${USER_ENDPOINT}/signup`;
 
 export interface UserRegistration {
     nom: string;
@@ -35,7 +36,13 @@ export class UtilisateurService {
         return this.httpClient.post(environment.baseUrl + REGISTER_USER_ENDPOINT, utilisateur);
     }
 
+    updateUser(user: UserModel): Observable<any> {
+        return this.httpClient.patch(environment.baseUrl +`users/${user.userId}`, user);
+    }
+
     banUtilisateur(user: UserModel): Observable<any> {
+        delete user['role'];
+        user.account_status = false;
         return this.httpClient.patch(environment.baseUrl + 'users/' + user.userId, user);
     }
 
@@ -47,5 +54,9 @@ export class UtilisateurService {
 
     CountTotalUser(): Observable<any> {
         return this.httpClient.get(environment.baseUrl + 'users/count');
+    }
+
+    getMedecinInfos() {
+        this.httpClient.get(environment.baseUrl + 'medecins?filter[include][0]=user')
     }
 }
