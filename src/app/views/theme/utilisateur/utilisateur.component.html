@@ -35,7 +35,7 @@
               <td>{{ user?.numero }}</td>
               <td>{{ user?.adresse }}</td>
               <td>
-                <span *ngIf="user.account_status == false" class="badge badge-warning">En attente</span>
+                <span *ngIf="user.account_status == false" class="badge badge-warning">Inactif</span>
                 <span *ngIf="user.account_status == true" class="badge badge-success">Validé</span>
               </td>
               <td>

@@ -36,7 +36,7 @@ import { AddPrestataireStructureComponent } from './prestataire/components/add-p
 import { PrestatraireStructureComponent } from './prestataire/components/prestatraire-structure/prestatraire-structure.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 @NgModule({
-  imports: [ 
+  imports: [
     CommonModule,
     ThemeRoutingModule,
     FormsModule,

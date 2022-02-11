@@ -2,7 +2,7 @@
     <div class="card-header">
       <strong>Roles</strong>
     </div>
-    <div class="card-body">
+    <div *ngIf="data?.mode !== 'delete'" class="card-body">
       <form [formGroup]="roleForm" (ngSubmit)="submit()"   class="form-horizontal">
         <div *ngIf="data?.item?.roleId" class="form-group row">
           <label class="col-md-3 col-form-label" for="nom">ID</label>
@@ -38,7 +38,7 @@
     <div class="card-header">
       <strong>Spécialisation</strong>
     </div>
-    <div class="card-body">
+    <div *ngIf="data?.mode !== 'delete'"  class="card-body">
       <form [formGroup]="specialisationForm" (ngSubmit)="submit()"  class="form-horizontal">
         <div *ngIf="data?.item?.specialisationId" class="form-group row">
           <label class="col-md-3 col-form-label" for="nom">ID</label>
@@ -75,13 +75,20 @@
     <div class="card-header">
       <strong>Structure Sanitaire</strong>
     </div>
-    <div class="card-body">
+    <div *ngIf="data?.mode !== 'delete'"  class="card-body">
       <form [formGroup]="structureSanitaireForm" (ngSubmit)="submit()" class="form-horizontal">
         <div *ngIf="data?.item?.structuresanitaireId" class="form-group row">
           <label class="col-md-3 col-form-label" for="nom">ID</label>
           <div class="col-md-9">
             <input readonly type="text" id="structuresanitaireId" formControlName="structuresanitaireId" class="form-control"
               required  />
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="is_actif">Actif</label>
+          <div class="col-md-9">
+            <input type="checkbox" formControlName="is_actif" class="form-control"
+              readonly />
           </div>
         </div>
         <div class="form-group row">
@@ -107,6 +114,50 @@
           </div>
         </div>
 
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="email">Email</label>
+          <div class="col-md-9">
+            <input type="email" formControlName="email" class="form-control" placeholder="Email Structure"
+               />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="adresse">Adresse</label>
+          <div class="col-md-9">
+            <input type="text" formControlName="adresse" class="form-control" placeholder="Adresse de la Structure" />
+          </div>
+        </div>
+        <div class="c-pointer">
+          <span (click)="showMap()">Afficher la carte</span>
+        </div>
+        <div (click)="showMap()" class="form-group row">
+          <label class="col-md-3 col-form-label" for="latitude">Latitude</label>
+          <div class="col-md-9">
+            <input disabled type="text" formControlName="latitude" class="form-control" placeholder="latitude"
+               />
+          </div>
+        </div>
+        <div (click)="showMap()" class="form-group row">
+          <label class="col-md-3 col-form-label" for="longitude">Longitude</label>
+          <div class="col-md-9">
+            <input disabled type="text" formControlName="longitude" class="form-control" placeholder="longitude"
+               />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-md-3 col-form-label" for="typePrestataire">Type de Structure</label>
+          <div class="col-md-9">
+            <select formControlName="typePrestataire" class="form-control" name="typePrestataire" id="typePrestataire">
+              <option value="PHARMACIE">Pharmacie</option>
+              <option value="CLINIQUE_PRIVE">Clinique Privée</option>
+              <option value="HOPITAL_PRIVE">Hôpital Privé</option>
+              <option value="HOPITAL_PUBLIC">Hôpital Public</option>
+          </select>
+          </div>
+        </div>
+
         <div *ngIf="data.mode === 'edit' || data.mode === 'create'" class="card-footer">
           <button type="submit" class="btn btn-sm btn-primary">
             <i class="fa fa-dot-circle-o"></i>{{ data.mode === 'edit' ? 'Modifier' : 'Crééer' }}
@@ -116,6 +167,17 @@
     </div>
   </div>
 
+  <div *ngIf="data?.mode === 'delete'" class="card-body">
+    Voulez-vous vraiment supprimer cet élément
+    <div class="card-footer">
+      <button (click)="deleteItem(data?.item)" class="btn btn-sm btn-primary">
+        <i class="fa fa-dot-circle-o"></i>Oui
+      </button>
+      <button (click)="close()" class="btn btn-sm btn-default">
+        <i class="fa fa-dot-circle-o"></i>Non
+      </button>
+    </div>
+  </div>
   <div *ngIf="hasError" class="error-msg">
     Veuillez renseigner toutes les infos du formulaires avant de valider
   </div>

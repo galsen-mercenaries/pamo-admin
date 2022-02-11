@@ -85,15 +85,31 @@ export class UtilisateurComponent implements OnInit {
             data: {user, mode},
             width: '450px'
         });
+        this.userDialogRef.afterClosed().subscribe((res: any) => {
+            console.log('res', res);
+
+            if(res?.payload) {
+                console.log('resp', res.payload);
+                if(mode === 'edit') {
+                    this.updateUserList(res?.payload);
+                } else if (mode === 'create') {
+                    this.getPage(this.p)
+                }
+
+            }
+        })
     }
 
     deactiveUser(user: UserModel) {
-        user.account_status = false;
-        delete user['role'];
-        this.matDialog.open(DeleteItemComponent, {
-            data: {user},
+        const modalRef = this.matDialog.open(DeleteItemComponent, {
+            data: {user, role: user.role},
             width: '450px'
         });
+        modalRef.afterClosed().subscribe((res: any) => {
+            if(res?.payload) {
+                user.account_status = false;
+            }
+        })
     }
 
     onSubmit() {
@@ -128,6 +144,8 @@ export class UtilisateurComponent implements OnInit {
     getUserPagination(limit, skip) {
         this.utilisateurService.getUtilisateurPagination(limit, skip).subscribe(res => {
             this.users = res;
+            console.log('users', this.users);
+
         });
     }
 
@@ -142,5 +160,10 @@ export class UtilisateurComponent implements OnInit {
         this.p = event;
         var skip = (event - 1) * this.pagelimit;
         this.getUserPagination(this.pagelimit, skip);
+    }
+
+    updateUserList(user: UserModel) {
+        const index =  this.users.findIndex((res: UserModel) => res.userId === user.userId);
+        this.users[index] = Object.assign({}, this.users[index], user, {role: this.users[index].role});
     }
 }
