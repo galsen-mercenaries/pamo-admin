@@ -25,7 +25,7 @@ export class EditUserComponent implements OnInit {
       account_status : new FormControl({value: this.data?.user?.account_status, disabled: this.data.mode === 'see'}, Validators.required),
       nom : new FormControl({value: this.data?.user?.nom, disabled: this.data.mode === 'see'}, Validators.required),
       prenom : new FormControl({value: this.data?.user?.prenom, disabled: this.data.mode === 'see'}, Validators.required),
-      email : new FormControl({value: this.data?.user?.email, disabled: this.data.mode === 'see'}, Validators.required),
+      email : new FormControl({value: this.data?.user?.email, disabled: this.data.mode === 'see' || this.data.mode === 'edit'}, Validators.required),
       numero : new FormControl({value: this.data?.user?.numero, disabled: this.data.mode === 'see'}, Validators.required),
       adresse : new FormControl({value: this.data?.user?.adresse, disabled: this.data.mode === 'see'}, Validators.required),
       roleCode : new FormControl({value: this.data?.user?.role?.code ? this.data?.user?.role?.code : 'ROLE_USER', disabled: this.data.mode === 'see' || this.data.mode === 'edit'}, Validators.required),

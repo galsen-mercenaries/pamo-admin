@@ -7,9 +7,6 @@
       </div>
     </div>
   </div>
-  <div class="col-6 col-lg-1">
-
-  </div>
   <div class="col-6 col-lg-2">
     <div class="card">
       <div class="card-body p-0 clearfix"><i class="fa fa-hospital-o bg-primary p-4 font-2xl mr-3 float-left"></i>
@@ -76,7 +73,6 @@
               <th>Nom</th>
               <th>Ville</th>
               <th>Adresse</th>
-              <th>Date Création</th>
               <th>Type structure</th>
               <th>Etat</th>
               <th>Ouvert Nuit</th>
@@ -89,7 +85,7 @@
               <td>{{ structure?.nom }}</td>
               <td>{{ structure?.ville }}</td>
               <td>{{ structure?.adresse }}</td>
-              <td>{{ structure?.date_creation | date: 'dd-MMMM-yyyy à HH:mm' }}</td>
+              <!-- <td>{{ structure?.date_creation | date: 'dd-MMMM-yyyy à HH:mm' }}</td> -->
               <td>{{ structure?.typePrestataire}}</td>
               <td>
                 <span *ngIf="structure?.is_actif == false" class="badge badge-warning">Fermé</span>
