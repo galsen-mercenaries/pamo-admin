@@ -57,6 +57,36 @@ export class UtilisateurService {
     }
 
     getMedecinInfos() {
-        this.httpClient.get(environment.baseUrl + 'medecins?filter[include][0]=user')
+       return this.httpClient.get(environment.baseUrl + 'medecins?filter[include][0]=user')
+    }
+
+    getMedecinInfosWithFilter(userId: number) {
+        const inclusionFilter = {
+            "where": {
+              "userId": userId
+            },
+            "fields": {
+              "medecinid": true,
+              "userId": true,
+              "structuresanitaireId": true
+            },
+            "include": [
+              {
+                "relation": "user"
+              },
+              {
+                "relation": "specialisations"
+              },
+              {
+                "relation": "structuresanitaire"
+              }
+            ]
+          }
+        const encodedFilter = encodeURIComponent(JSON.stringify(inclusionFilter));
+        return this.httpClient.get(environment.baseUrl + 'medecins?filter='+encodedFilter)
+    }
+
+    updateMedecinStructureSanitaire(medecinId: number ,userId: number, structuresanitaireId) {
+        return this.httpClient.patch(environment.baseUrl + `medecins/${medecinId}`, {userId, structuresanitaireId})
     }
 }
