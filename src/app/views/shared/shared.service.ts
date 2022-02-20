@@ -43,7 +43,6 @@ export class SharedService {
 
   generateImages(objets) {
     for (var i = 0; i < objets.length; ++i) {
-      //console.log(objets[i]["image"])
       objets[i]['image_url'] = this.transform(objets[i]['image_url']);
     }
 
@@ -53,12 +52,12 @@ export class SharedService {
   checkFileSize(file : any) {
     return (file.size > environment.fileMaxSize ? true : false)
   }
-  
+
   generateString(baseString: string) {
     baseString = baseString.replace(/[^a-zA-Z0-9]/g,"");
     const charactersLength = baseString.length;
     const result = baseString + charactersLength;
-    
+
     return result
   }
 }

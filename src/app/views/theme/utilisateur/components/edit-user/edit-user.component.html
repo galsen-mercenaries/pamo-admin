@@ -75,11 +75,11 @@
             </div>
 
 
-            <div class="form-group row">
+            <div *ngIf="data.mode === 'edit'" class="form-group row">
               <label class="col-md-3 col-form-label" for="role">Spécialisations</label>
               <div class="col-md-9">
-                  <select multiple formControlName="specialisations" class="form-control" name="specialisations" id="specialisations">
-                      <option *ngFor="let item of listSpecialisation" [ngValue]="getSelectedSpecialisation(item, userForm.get('specialisations')!.value)" > {{ item?.nom}} </option>
+                  <select multiple formControlName="list_specialisations" class="form-control" name="list_specialisations" id="list_specialisations">
+                      <option *ngFor="let item of listSpecialisation" [ngValue]="getSelectedSpecialisation(item, userForm.get('list_specialisations')!.value)" > {{ item?.nom}} </option>
                   </select>
               </div>
             </div>

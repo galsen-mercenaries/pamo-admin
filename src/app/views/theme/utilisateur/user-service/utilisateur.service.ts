@@ -86,7 +86,7 @@ export class UtilisateurService {
         return this.httpClient.get(environment.baseUrl + 'medecins?filter='+encodedFilter)
     }
 
-    updateMedecinStructureSanitaire(medecinId: number ,userId: number, structuresanitaireId) {
-        return this.httpClient.patch(environment.baseUrl + `medecins/${medecinId}`, {userId, structuresanitaireId})
+    updateMedecinStructureSanitaire(medecinId: number ,userId: number, structuresanitaireId, specialisations?: any) {
+        return this.httpClient.patch(environment.baseUrl + `medecins/${medecinId}`, {userId, structuresanitaireId, list_specialisations: specialisations})
     }
 }

@@ -37,7 +37,7 @@ export class EditUserComponent implements OnInit {
       adresse: new FormControl( { value: this.data?.user?.adresse, disabled: this.data.mode === 'see' }, Validators.required ),
       roleCode: new FormControl( { value: this.data?.user?.role?.code ? this.data?.user?.role?.code : 'ROLE_USER', disabled: this.data.mode === 'see' }, Validators.required ),
       structuresanitaireId: new FormControl( { value: this.structureSanitaires?.structuresanitaireId, disabled: this.data.mode === 'see' } ),
-      specialisations: new FormControl( { value: [], disabled: this.data.mode === 'see' } )
+      list_specialisations: new FormControl( { value: [], disabled: this.data.mode === 'see' } )
     } );
 
     this.getStructureSanitaire();
@@ -65,11 +65,13 @@ export class EditUserComponent implements OnInit {
     this.isLoading = true;
     this.hasError = false;
     this.errorMsg = 'Une erreur est survenue';
-    const payload: UserRegistration = this.userForm.value;
-    if ( !payload?.structuresanitaireId ) delete payload.structuresanitaireId;
-    if ( payload?.structuresanitaireId ) payload.structuresanitaireId = +payload?.structuresanitaireId;
 
     if ( !this.data?.user?.userId ) {
+      const payload: any = this.userForm.value;
+      delete payload.list_specialisations;
+
+      if ( !payload?.structuresanitaireId ) delete payload.structuresanitaireId;
+      if ( payload?.structuresanitaireId ) payload.structuresanitaireId = +payload?.structuresanitaireId;
       payload.password = Math.random().toString( 10 ).slice( -8 );
       this.userService.registernNewUser( payload ).subscribe( ( res: any ) => {
         this.isLoading = false;
@@ -82,15 +84,18 @@ export class EditUserComponent implements OnInit {
         this.errorMsg = err?.error?.error?.message;
       } )
     } else {
-      if ( payload.roleCode === 'ROLE_MEDECIN' ) {
-        this.userService.updateMedecinStructureSanitaire( this.medecinId, this.data.user.userId, payload.structuresanitaireId ).subscribe()
+      const payloadUpdateEntity: any = this.userForm.value;
+      if ( payloadUpdateEntity.roleCode === 'ROLE_MEDECIN' ) {
+        this.userService.updateMedecinStructureSanitaire( this.medecinId, this.data.user.userId, payloadUpdateEntity.structuresanitaireId, this.userForm.value.list_specialisations ).subscribe()
       }
-      delete payload.roleCode;
-      delete payload.structuresanitaireId;
-      this.userService.updateUser( payload ).subscribe( ( res: any ) => {
+      delete payloadUpdateEntity.roleCode;
+      delete payloadUpdateEntity.structuresanitaireId;
+      delete payloadUpdateEntity.list_specialisations;
+
+      this.userService.updateUser( payloadUpdateEntity ).subscribe( ( res: any ) => {
         this.isLoading = false;
         this.alertService.displaySuccessMsg( "Les infos de l'utilisateur ont bien été mises à jour" );
-        const data = { payload };
+        const data = { payloadUpdateEntity };
         this.close( data );
       }, ( err: any ) => {
         this.hasError = true;
@@ -113,7 +118,7 @@ export class EditUserComponent implements OnInit {
 
       this.userForm.patchValue( {
         structuresanitaireId: this.structureSanitaires?.structuresanitaireId,
-        specialisations: this.specialisations
+        list_specialisations: this.specialisations
       } )
     } );
   }
