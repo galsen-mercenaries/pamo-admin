@@ -101,4 +101,7 @@ export class StructureSanitaireComponent implements OnInit {
     const url ="theme/structure-sanitaire/edit/" + structure.structuresanitaireId;
     this.router.navigate([url]);
   }
+
+  openDialogUser(structure: any, type: string) {}
+  deactiveUser(structure: any) {}
 }

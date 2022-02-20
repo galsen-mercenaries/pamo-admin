@@ -29,8 +29,6 @@ export class MapComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("this?.data", this?.data);
-
     (mapboxgl as any).accessToken = environment.mapbox.accessToken;
     this.map = new mapboxgl.Map({
       container: "map",
@@ -46,7 +44,6 @@ export class MapComponent implements OnInit {
         mapboxgl: mapboxgl,
       })
     );
-    console.log(this.data)
     this.createMarker(this.data.lnt, this.data.lat);
   }
 
@@ -80,7 +77,6 @@ export class MapComponent implements OnInit {
       this.selectedLat = marker.getLngLat().lat;
       this.selectedLng = marker.getLngLat().lng;
       this.result = marker.getLngLat();
-      console.log(marker.getLngLat());
     });
   }
 

@@ -22,10 +22,8 @@ export class LoginComponent {
   onSubmit(){
     var userData = this.loginForm.value
     //this.router.navigate(['dashboard'])
-    console.log("test")
     this.authServ.userLogin(userData).subscribe(
       (res: any) => {
-        console.log(res)
         this.router.navigate(['dashboard'])
       },
       (err) => {
@@ -33,6 +31,6 @@ export class LoginComponent {
         this.isError = true
       }
     )
-    
+
   }
 }

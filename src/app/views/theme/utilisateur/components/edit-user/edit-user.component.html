@@ -7,7 +7,7 @@
           <div class="form-group row">
             <label class="col-md-3 col-form-label" for="role">Rôle</label>
             <div class="col-md-9">
-                <select formControlName="roleCode" class="form-control" name="role" id="role">
+                <select [ngClass]="{ 'role-select': data?.user?.userId} " formControlName="roleCode" class="form-control" name="role" id="role">
                     <option value="ROLE_USER">Role User</option>
                     <option value="ROLE_MEDECIN">Role Medecin</option>
                     <option value="ROLE_ADMIN">Role Administrateur</option>
@@ -64,14 +64,27 @@
             </div>
           </div>
 
-          <div class="form-group row" *ngIf="userForm?.value?.roleCode === 'ROLE_MEDECIN'">
-            <label class="col-md-3 col-form-label" for="role">Structure Sanitaire</label>
-            <div class="col-md-9">
-                <select formControlName="structuresanitaireId" class="form-control" name="role" id="role">
-                    <option *ngFor="let item of structuresSanitaires$ | async" [value]="+item?.structuresanitaireId"> {{ item?.nom}} </option>
-                </select>
+          <ng-container *ngIf="userForm?.value?.roleCode === 'ROLE_MEDECIN'">
+            <div class="form-group row">
+              <label class="col-md-3 col-form-label" for="role">Structure Sanitaire</label>
+              <div class="col-md-9">
+                  <select formControlName="structuresanitaireId" class="form-control" name="role" id="role">
+                      <option *ngFor="let item of structuresSanitaires$ | async" [value]="+item?.structuresanitaireId"> {{ item?.nom}} </option>
+                  </select>
+              </div>
             </div>
-          </div>
+
+
+            <div *ngIf="data.mode === 'edit'" class="form-group row">
+              <label class="col-md-3 col-form-label" for="role">Spécialisations</label>
+              <div class="col-md-9">
+                  <select multiple formControlName="list_specialisations" class="form-control" name="list_specialisations" id="list_specialisations">
+                      <option *ngFor="let item of listSpecialisation" [ngValue]="getSelectedSpecialisation(item, userForm.get('list_specialisations')!.value)" > {{ item?.nom}} </option>
+                  </select>
+              </div>
+            </div>
+
+          </ng-container>
 
           <div class="card-footer">
             <button *ngIf="data.mode === 'edit' || data.mode === 'create'" [disabled]="isLoading" type="submit" class="btn btn-sm btn-primary">
