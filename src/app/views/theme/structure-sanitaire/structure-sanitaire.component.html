@@ -75,7 +75,6 @@
               <th>Adresse</th>
               <th>Type structure</th>
               <th>Etat</th>
-              <th>Ouvert Nuit</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -90,10 +89,6 @@
               <td>
                 <span *ngIf="structure?.is_actif == false" class="badge badge-warning">Fermé</span>
                 <span *ngIf="structure?.is_actif== true" class="badge badge-success">Ouvert</span>
-              </td>
-              <td>
-                <span *ngIf="structure?.is_all_night == false" class="badge badge-warning">Non</span>
-                <span *ngIf="structure?.is_all_night == true" class="badge badge-success">Oui</span>
               </td>
               <td>
 

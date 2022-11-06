@@ -35,6 +35,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AddPrestataireStructureComponent } from './prestataire/components/add-prestataire-structure/add-prestataire-structure.component';
 import { PrestatraireStructureComponent } from './prestataire/components/prestatraire-structure/prestatraire-structure.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,6 +52,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     MatAutocompleteModule,
     MatIconModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
     NgMultiSelectDropDownModule.forRoot()
   ],
   entryComponents: [EditUserComponent, DeleteItemComponent, ItemsFormulaireComponent],

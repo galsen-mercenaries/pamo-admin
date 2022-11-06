@@ -8,9 +8,9 @@ import { MapComponent } from "../../../../shared/map/map.component";
 import { Router, ActivatedRoute } from "@angular/router";
 import {
   MatDialog,
-  MatDialogRef,
   MAT_DIALOG_DATA,
 } from "@angular/material/dialog";
+import { finalize } from "rxjs/operators";
 
 @Component({
   selector: "app-add-structure-sanitaire",
@@ -44,7 +44,7 @@ export class AddStructureSanitaireComponent implements OnInit {
   lng: number;
   mode: string = "post";
   occurencesList;
-
+  isSubmitting = false;
   constructor(
     private formBuilder: FormBuilder,
     private sharedService: SharedService,
@@ -79,9 +79,13 @@ export class AddStructureSanitaireComponent implements OnInit {
     } else {
       delete data["watch_periodicity_value"];
     }
-
+    this.isSubmitting = true;
     if (this.mode == "post") {
-      this.structureSanitaireService.addStructureSanitaire(data).subscribe(
+      this.structureSanitaireService.addStructureSanitaire(data).pipe(
+        finalize(() => {
+          this.isSubmitting = false;
+        })
+      ).subscribe(
         (res) => {
           console.log(res);
           this.router.navigate(["/theme/structure-sanitaire"]);
@@ -94,6 +98,11 @@ export class AddStructureSanitaireComponent implements OnInit {
       console.log("update Methode");
       this.structureSanitaireService
         .updateStructureSanitaire(this.id, data)
+        .pipe(
+          finalize(() => {
+            this.isSubmitting = false;
+          })
+        )
         .subscribe(
           (res) => {
             console.log(res);
