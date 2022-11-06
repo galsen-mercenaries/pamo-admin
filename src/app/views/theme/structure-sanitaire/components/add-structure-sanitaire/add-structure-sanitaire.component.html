@@ -21,7 +21,6 @@
                 <div class="col-md-9">
                     <select id="select1" name="select1" formControlName="typePrestataire"
                         class="form-control form-control-sm">
-                        <option value="0">Choix</option>
                         <option value="Pharmacie">Pharmacie</option>
                         <option value="Hôpital">Hôpital</option>
                         <option value="Dispensaire">Dispensaire</option>
@@ -46,14 +45,14 @@
             <div (click)="showMap()" class="form-group row">
                 <label class="col-md-3 col-form-label" for="latitude">Latitude</label>
                 <div class="col-md-9">
-                    <input disabled type="text" formControlName="latitude" class="form-control"
+                    <input readonly type="text" formControlName="latitude" class="form-control"
                         placeholder="latitude" />
                 </div>
             </div>
             <div (click)="showMap()" class="form-group row">
                 <label class="col-md-3 col-form-label" for="longitude">Longitude</label>
                 <div class="col-md-9">
-                    <input disabled type="text" formControlName="longitude" class="form-control"
+                    <input readonly type="text" formControlName="longitude" class="form-control"
                         placeholder="longitude" />
                 </div>
             </div>
@@ -62,10 +61,9 @@
             </div>
             <br>
             <div class="form-group row">
-                <label class="col-md-3 col-form-label" for="select3">Etat Prestataire</label>
+                <label class="col-md-3 col-form-label" for="select3">Ouvert/Fermé</label>
                 <div class="col-md-9">
                     <select id="select3" name="select3" formControlName="is_actif" class="form-control form-control-sm">
-                        <option [ngValue]="0">Choix</option>
                         <option [ngValue]="true">Ouvert</option>
                         <option [ngValue]="false">Fermé</option>
                     </select>
@@ -76,7 +74,6 @@
                 <div class="col-md-9">
                     <select id="select4" name="select4" formControlName="is_all_night"
                         class="form-control form-control-sm">
-                        <option [ngValue]="0">Choix</option>
                         <option [ngValue]="true">Oui</option>
                         <option [ngValue]="false">Non</option>
                     </select>
@@ -85,15 +82,14 @@
             <div class="form-group row">
                 <label class="col-md-3 col-form-label" for="select5">Périodicité</label>
                 <div class="col-md-9">
-                    <select id="select5" [(ngModel)]="selectedOption" name="select5" formControlName="periodicityType"
-                        (ngModelChange)="changePrestataire($event)" class="form-control form-control-sm">
-                        <option value="">Choix</option>
+                    <select id="select5" name="select5" formControlName="periodicityType"
+                         class="form-control form-control-sm">
                         <option value="occurency">Occurence</option>
                         <option value="periodicity">Périodicité</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group row" *ngIf="selectedOption=='periodicity'">
+            <div class="form-group row" *ngIf="structureSanitaireForm.get('periodicityType')?.value ==='periodicity'">
                 <div class="col-md-6">
                     <span class="help-block">Date de Début</span>
                     <input class="form-control" formControlName="watch_start_date" id="date-input" type="date"
@@ -105,17 +101,24 @@
                         name="date-input" placeholder="date">
                 </div>
             </div>
-            <div class="form-group row" *ngIf="selectedOption=='occurency'">
-                <label class="col-md-3 col-form-label" for="position-input">Occurences</label>
-                <div class="col-md-9">
-                    <mat-select formControlName="watch_periodicity_value" multiple>
-                        <mat-option *ngFor="let jour of occurencesList" [value]="jour">{{jour}}</mat-option>
-                    </mat-select>
+            <div class="form-group row" *ngIf="structureSanitaireForm.get('periodicityType')?.value ==='occurency'">
+                <label class="col-md-3 col-form-label" for="position-input">Jours d'ouverturre</label>
+                <div class="col-md">
+                    <mat-form-field class="col-md" appearance="fill">
+                        <mat-label>Choix des jours de la semaine</mat-label>
+                        <mat-select formControlName="watch_periodicity_value" multiple>
+                            <mat-option *ngFor="let jour of occurencesList" [value]="jour">{{jour}}</mat-option>
+                        </mat-select>
+                </mat-form-field>
+
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-sm btn-primary">
-                    <i class="fa fa-dot-circle-o"></i>Enregistrer
+                <button [disabled]="isSubmitting" type="submit" class="btn btn-sm btn-primary">
+                    <i class="fa fa-dot-circle-o">
+                    </i>
+                    Enregistrer
+                    <mat-spinner *ngIf="isSubmitting" [diameter]="15"></mat-spinner>
                 </button>
             </div>
         </form>
