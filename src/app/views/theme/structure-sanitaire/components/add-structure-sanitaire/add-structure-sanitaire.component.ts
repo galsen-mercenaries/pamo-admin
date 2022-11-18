@@ -70,8 +70,10 @@ export class AddStructureSanitaireComponent implements OnInit {
 
   onSubmit() {
     var data = this.structureSanitaireForm.value;
+    console.log('data', data);
+
     data["code"] = this.sharedService.generateString(data["nom"]);
-    if (this.selectedOption == "occurency") {
+    if (this.structureSanitaireForm.get('periodicityType')?.value== "occurency") {
       delete data["watch_start_date"];
       delete data["watch_end_date"];
       data["watch_periodicity_value"] =
@@ -139,9 +141,14 @@ export class AddStructureSanitaireComponent implements OnInit {
       .getStructureSanitaireById(id)
       .subscribe((res) => {
         res["watch_periodicity_value"] =
-          res["watch_periodicity_value"].split(",");
+          res["watch_periodicity_value"]?.split(",");
         this.structureSanitaireForm.patchValue(res);
         console.log(res, "update");
       });
+  }
+
+  change(event:any) {
+    console.log('event', event);
+
   }
 }
