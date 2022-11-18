@@ -85,11 +85,11 @@
                     <select id="select5" name="select5" formControlName="periodicityType"
                          class="form-control form-control-sm">
                         <option value="occurency">Occurence</option>
-                        <option value="periodicity">Périodicité</option>
+                        <option value="duration">Périodicité</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group row" *ngIf="structureSanitaireForm.get('periodicityType')?.value ==='periodicity'">
+            <div class="form-group row" *ngIf="structureSanitaireForm.get('periodicityType')?.value ==='duration'">
                 <div class="col-md-6">
                     <span class="help-block">Date de Début</span>
                     <input class="form-control" formControlName="watch_start_date" id="date-input" type="date"
@@ -102,11 +102,11 @@
                 </div>
             </div>
             <div class="form-group row" *ngIf="structureSanitaireForm.get('periodicityType')?.value ==='occurency'">
-                <label class="col-md-3 col-form-label" for="position-input">Jours d'ouverturre</label>
+                <label class="col-md-3 col-form-label" for="position-input">Jours d'ouverture</label>
                 <div class="col-md">
                     <mat-form-field class="col-md" appearance="fill">
                         <mat-label>Choix des jours de la semaine</mat-label>
-                        <mat-select formControlName="watch_periodicity_value" multiple>
+                        <mat-select formControlName="watch_periodicity_value" (selectionChange)="change($event)" multiple>
                             <mat-option *ngFor="let jour of occurencesList" [value]="jour">{{jour}}</mat-option>
                         </mat-select>
                 </mat-form-field>
