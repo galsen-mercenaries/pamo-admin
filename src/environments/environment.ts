@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   fileMaxSize : 50000000,
-  baseUrl: 'https://pamo-backend-loopback.herokuapp.com/',
+  baseUrl: 'https://pamo-backend-prod.up.railway.app/',
   mapbox : {
     accessToken : "pk.eyJ1IjoibWF0ZmFsbCIsImEiOiJja3RsaGx3ODAwMmZpMm5wYmtzNTRrN25kIn0.xjywL0L_vDNlyreSmHOFDA"
   },
